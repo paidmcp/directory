@@ -6,17 +6,22 @@ import { motion } from "framer-motion";
 export function InstallSnippet({ endpoint }: { endpoint: string }) {
   const [copied, setCopied] = useState(false);
 
-  const snippet = useMemo(
-    () => `{
+  const snippet = useMemo(() => {
+    let name = "paid-mcp";
+    try {
+      name = new URL(endpoint).hostname.split(".")[0] || name;
+    } catch {
+      // keep fallback
+    }
+    return `{
   "mcpServers": {
-    "paid-mcp": {
+    "${name}": {
       "command": "paidmcp",
       "args": ["run", "${endpoint}"]
     }
   }
-}`,
-    [endpoint]
-  );
+}`;
+  }, [endpoint]);
 
   const copy = async () => {
     await navigator.clipboard.writeText(snippet);
