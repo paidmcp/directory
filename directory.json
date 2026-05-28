@@ -1,0 +1,37 @@
+{
+  "mcps": [
+    {
+      "id": "crypto-prices",
+      "name": "Crypto Prices",
+      "tagline": "Real-time crypto market data for AI agents",
+      "description": "Current prices, market stats, and historical data from CoinGecko for AI workflows.",
+      "author": "paidmcp",
+      "github": "https://github.com/paidmcp/examples/tree/main/crypto-prices-mcp",
+      "endpoint": "https://crypto-prices.paidmcp.dev",
+      "chain": "plasma",
+      "tools": [
+        {
+          "name": "get_price",
+          "description": "Current USD price",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "get_price_history",
+          "description": "Historical chart data",
+          "priceUsdt": 0.002
+        },
+        {
+          "name": "get_token_info",
+          "description": "Market cap, volume, rank",
+          "priceUsdt": 0.001
+        }
+      ],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
+      "addedAt": "2026-06-01"
+    }
+  ]
+}
