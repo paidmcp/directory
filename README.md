@@ -14,8 +14,8 @@ The homepage renders these sections separately.
 ## Commands
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Data source
@@ -44,3 +44,7 @@ PRs run automated checks that:
 - validate required fields and URLs in `directory.json`
 - enforce supported values (`listingType`, chains, positive `priceUsdt`)
 - verify the app still builds
+
+## License
+
+MIT. See `LICENSE`.
