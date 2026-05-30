@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 import { useMemo } from "react";
 
 type MagneticButtonProps = {
@@ -10,7 +15,12 @@ type MagneticButtonProps = {
   onClick?: () => void;
 };
 
-export function MagneticButton({ children, className, type = "button", onClick }: MagneticButtonProps) {
+export function MagneticButton({
+  children,
+  className,
+  type = "button",
+  onClick,
+}: MagneticButtonProps) {
   const prefersReducedMotion = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);

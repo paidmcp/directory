@@ -16,8 +16,8 @@ export function InstallSnippet({ endpoint }: { endpoint: string }) {
     return `{
   "mcpServers": {
     "${name}": {
-      "command": "paidmcp",
-      "args": ["run", "${endpoint}"]
+      "command": "npx",
+      "args": ["paidmcp-client", "run", "${endpoint}"]
     }
   }
 }`;
@@ -38,7 +38,9 @@ export function InstallSnippet({ endpoint }: { endpoint: string }) {
       transition={{ duration: 0.45, ease: "easeOut" }}
     >
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-sm text-neutral-300">Claude Desktop / Cursor MCP config</p>
+        <p className="text-sm text-neutral-300">
+          Claude Desktop / Cursor MCP config
+        </p>
         <motion.button
           onClick={copy}
           className="rounded-md border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200 transition hover:scale-[1.03] hover:bg-cyan-400/20"

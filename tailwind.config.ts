@@ -6,11 +6,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
-      }
-    }
+        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };
 
 export default config;

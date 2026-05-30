@@ -1,11 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { AnimatedInView } from "../components/AnimatedInView";
 import { MagneticButton } from "../components/MagneticButton";
 import data from "../directory.json";
 import { McpCard } from "../components/McpCard";
 
+export const metadata: Metadata = {
+  title: "PaidMCP Directory",
+  description:
+    "Discover and install paid MCP servers with transparent per-call pricing.",
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default function HomePage() {
   const totalTools = data.mcps.reduce((acc, mcp) => acc + mcp.tools.length, 0);
+  const liveMcps = data.mcps.filter(
+    (mcp) => (mcp.listingType ?? "example") === "live",
+  );
+  const exampleMcps = data.mcps.filter(
+    (mcp) => (mcp.listingType ?? "example") === "example",
+  );
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
@@ -24,8 +40,9 @@ export default function HomePage() {
             with frictionless per-call payments.
           </h1>
           <p className="mt-4 max-w-3xl text-neutral-300">
-            Powered by x402 + Tether WDK. Build composable AI tools, price each call in USDT, and ship production-ready
-            agents without subscriptions.
+            Powered by x402 + Tether WDK. Build composable AI tools, price each
+            call in USDT, and ship production-ready agents without
+            subscriptions.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 text-sm">
@@ -57,11 +74,34 @@ export default function HomePage() {
 
       <AnimatedInView className="mt-10" delay={0.08}>
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Featured MCPs</h2>
-          <p className="text-sm text-neutral-400">Curated for reliability and pricing clarity</p>
+          <h2 className="text-2xl font-semibold">Live paid MCPs</h2>
+          <p className="text-sm text-neutral-400">
+            Production endpoints from maintainers
+          </p>
+        </div>
+        {liveMcps.length === 0 ? (
+          <div className="rounded-xl border border-neutral-800/80 bg-neutral-900/40 p-5 text-sm text-neutral-300">
+            No live third-party listings yet. Use the submit page to open a PR
+            and request inclusion.
+          </div>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {liveMcps.map((mcp) => (
+              <McpCard key={mcp.id} mcp={mcp} />
+            ))}
+          </div>
+        )}
+      </AnimatedInView>
+
+      <AnimatedInView className="mt-10" delay={0.12}>
+        <div className="mb-5 flex items-center justify-between">
+          <h2 className="text-2xl font-semibold">PaidMCP examples</h2>
+          <p className="text-sm text-neutral-400">
+            Reference implementations from the PaidMCP team
+          </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {data.mcps.map((mcp) => (
+          {exampleMcps.map((mcp) => (
             <McpCard key={mcp.id} mcp={mcp} />
           ))}
         </div>

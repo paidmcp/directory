@@ -3,7 +3,14 @@
 import { motion } from "framer-motion";
 
 type Tool = { name: string; description: string; priceUsdt: number };
-type Mcp = { id: string; name: string; tagline: string; tags: string[]; tools: Tool[] };
+type Mcp = {
+  id: string;
+  name: string;
+  tagline: string;
+  tags: string[];
+  tools: Tool[];
+  listingType?: string;
+};
 
 export function McpCard({ mcp }: { mcp: Mcp }) {
   const prices = mcp.tools.map((t) => t.priceUsdt);
@@ -22,12 +29,25 @@ export function McpCard({ mcp }: { mcp: Mcp }) {
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold text-neutral-100">{mcp.name}</h3>
-        <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-1 font-mono text-[11px] text-emerald-200">
-          {mcp.tools.length} tools
-        </span>
+        <div className="flex gap-2">
+          <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-1 font-mono text-[11px] text-emerald-200">
+            {mcp.tools.length} tools
+          </span>
+          <span
+            className={`rounded-full border px-2 py-1 font-mono text-[11px] ${
+              (mcp.listingType ?? "example") === "live"
+                ? "border-cyan-400/30 bg-cyan-400/10 text-cyan-200"
+                : "border-neutral-600 bg-neutral-800/70 text-neutral-200"
+            }`}
+          >
+            {(mcp.listingType ?? "example") === "live" ? "live" : "example"}
+          </span>
+        </div>
       </div>
       <p className="mt-2 text-sm text-neutral-300">{mcp.tagline}</p>
-      <p className="mt-3 font-mono text-xs text-neutral-400">Price range: ${min} - ${max} USDT</p>
+      <p className="mt-3 font-mono text-xs text-neutral-400">
+        Price range: ${min} - ${max} USDT
+      </p>
       <div className="mt-4 flex gap-2">
         {mcp.tags.slice(0, 3).map((tag) => (
           <span

@@ -1,0 +1,36 @@
+name: Directory PR checks
+
+on:
+  pull_request:
+    paths:
+      - "directory.json"
+      - "app/**"
+      - "components/**"
+      - "scripts/**"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.js"
+      - "tsconfig.json"
+      - ".github/workflows/pr-checks.yml"
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate listing data
+        run: npm run validate:data
+
+      - name: Build
+        run: npm run build

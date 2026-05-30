@@ -4,13 +4,13 @@ import { motion, type Variants } from "framer-motion";
 
 const defaultVariants: Variants = {
   hidden: { opacity: 0, y: 22 },
-  visible: { opacity: 1, y: 0 }
+  visible: { opacity: 1, y: 0 },
 };
 
 export function AnimatedInView({
   children,
   className,
-  delay = 0
+  delay = 0,
 }: {
   children: React.ReactNode;
   className?: string;

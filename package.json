@@ -7,7 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "format:check": "prettier --check \"**/*.{js,mjs,ts,tsx,json,md,yml,yaml,css}\"",
+    "format": "prettier --write \"**/*.{js,mjs,ts,tsx,json,md,yml,yaml,css}\"",
+    "validate:data": "node scripts/validate-directory.mjs",
+    "check": "npm run validate:data && npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",
@@ -21,7 +26,10 @@
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.5.0",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.2.6",
     "postcss": "^8.5.15",
+    "prettier": "^3.6.2",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3"
   }

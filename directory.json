@@ -8,11 +8,24 @@
       "author": "paidmcp",
       "github": "https://github.com/paidmcp/examples/tree/main/crypto-prices-mcp",
       "endpoint": "https://crypto-prices.paidmcp.dev",
+      "listingType": "example",
       "chains": ["base", "plasma"],
       "tools": [
-        { "name": "get_price", "description": "Current USD price", "priceUsdt": 0.001 },
-        { "name": "get_price_history", "description": "Historical chart data", "priceUsdt": 0.002 },
-        { "name": "get_token_info", "description": "Market cap, volume, rank", "priceUsdt": 0.001 }
+        {
+          "name": "get_price",
+          "description": "Current USD price",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "get_price_history",
+          "description": "Historical chart data",
+          "priceUsdt": 0.002
+        },
+        {
+          "name": "get_token_info",
+          "description": "Market cap, volume, rank",
+          "priceUsdt": 0.001
+        }
       ],
       "tags": ["crypto", "data", "prices"],
       "addedAt": "2026-06-01"
@@ -25,11 +38,24 @@
       "author": "paidmcp",
       "github": "https://github.com/paidmcp/examples/tree/main/persian-translation-mcp",
       "endpoint": "https://persian-translation.paidmcp.dev",
+      "listingType": "example",
       "chains": ["base", "plasma"],
       "tools": [
-        { "name": "translate_to_persian", "description": "English to Persian with formality control", "priceUsdt": 0.005 },
-        { "name": "translate_from_persian", "description": "Persian to English preserving nuance", "priceUsdt": 0.005 },
-        { "name": "explain_persian_idiom", "description": "Literal and cultural meaning of an idiom", "priceUsdt": 0.005 }
+        {
+          "name": "translate_to_persian",
+          "description": "English to Persian with formality control",
+          "priceUsdt": 0.005
+        },
+        {
+          "name": "translate_from_persian",
+          "description": "Persian to English preserving nuance",
+          "priceUsdt": 0.005
+        },
+        {
+          "name": "explain_persian_idiom",
+          "description": "Literal and cultural meaning of an idiom",
+          "priceUsdt": 0.005
+        }
       ],
       "tags": ["translation", "persian", "llm"],
       "addedAt": "2026-06-01"
@@ -42,12 +68,29 @@
       "author": "paidmcp",
       "github": "https://github.com/paidmcp/examples/tree/main/spanish-bureaucracy-mcp",
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
+      "listingType": "example",
       "chains": ["base", "plasma"],
       "tools": [
-        { "name": "interpret_aeat_letter", "description": "Interpret a Hacienda letter and next actions", "priceUsdt": 0.05 },
-        { "name": "draft_hacienda_response", "description": "Draft a professional Spanish response", "priceUsdt": 0.05 },
-        { "name": "find_cnae_code", "description": "Suggest CNAE and IAE codes", "priceUsdt": 0.02 },
-        { "name": "explain_modelo_130", "description": "Explain Modelo 130 estimate and fields", "priceUsdt": 0.05 }
+        {
+          "name": "interpret_aeat_letter",
+          "description": "Interpret a Hacienda letter and next actions",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "draft_hacienda_response",
+          "description": "Draft a professional Spanish response",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "find_cnae_code",
+          "description": "Suggest CNAE and IAE codes",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "explain_modelo_130",
+          "description": "Explain Modelo 130 estimate and fields",
+          "priceUsdt": 0.05
+        }
       ],
       "tags": ["spain", "tax", "bureaucracy", "llm"],
       "addedAt": "2026-06-01"
