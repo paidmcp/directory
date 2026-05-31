@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { RouteTransition } from "../components/RouteTransition";
 import "./globals.css";
 
@@ -56,6 +57,9 @@ export default function RootLayout({
               <Link className="hover:text-white" href="/build">
                 Build
               </Link>
+              <Link className="hover:text-white" href="/connect">
+                Connect
+              </Link>
               <Link
                 className="hover:text-white"
                 href="https://github.com/paidmcp"
@@ -68,6 +72,13 @@ export default function RootLayout({
           </div>
         </header>
         <RouteTransition>{children}</RouteTransition>
+        {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ? (
+          <Script
+            defer
+            data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
+            src="https://plausible.io/js/script.js"
+          />
+        ) : null}
         <footer className="mt-20 border-t border-neutral-800/70">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-xs text-neutral-400">
             <p>PaidMCP Directory</p>

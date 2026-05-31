@@ -20,6 +20,7 @@ export default function SubmitPage() {
   "github": "https://github.com/your-org/your-repo",
   "endpoint": "https://your-mcp.example.com",
   "listingType": "live",
+  "trialSupported": true,
   "chains": ["base", "plasma"],
   "tools": [
     { "name": "your_tool", "description": "What it does", "priceUsdt": 0.01 }
@@ -58,6 +59,24 @@ export default function SubmitPage() {
             <code className="font-mono">directory.json</code> and run a
             production build before merge.
           </p>
+          <div className="mt-4 flex flex-wrap gap-3 text-sm">
+            <a
+              href="https://github.com/paidmcp/directory/fork"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md border border-neutral-700 bg-neutral-900/60 px-3 py-2 hover:border-neutral-500"
+            >
+              Fork repository
+            </a>
+            <a
+              href="https://github.com/paidmcp/directory/compare/main...main?quick_pull=1&title=Add%20new%20PaidMCP%20listing&template=.github/PULL_REQUEST_TEMPLATE/new-listing.md"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-md border border-cyan-400/30 bg-cyan-400/10 px-3 py-2 text-cyan-100"
+            >
+              Open prefilled PR
+            </a>
+          </div>
           <ul className="mt-6 space-y-2 text-neutral-300">
             <li className="rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-3">
               Working HTTPS endpoint

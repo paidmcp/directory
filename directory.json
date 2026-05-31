@@ -9,6 +9,7 @@
       "github": "https://github.com/paidmcp/examples/tree/main/crypto-prices-mcp",
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
+      "trialSupported": true,
       "chains": ["base", "plasma"],
       "tools": [
         {
@@ -39,6 +40,7 @@
       "github": "https://github.com/paidmcp/examples/tree/main/persian-translation-mcp",
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
+      "trialSupported": true,
       "chains": ["base", "plasma"],
       "tools": [
         {
@@ -69,6 +71,7 @@
       "github": "https://github.com/paidmcp/examples/tree/main/spanish-bureaucracy-mcp",
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
+      "trialSupported": true,
       "chains": ["base", "plasma"],
       "tools": [
         {

@@ -62,6 +62,12 @@ for (const [index, mcp] of parsed.mcps.entries()) {
   if (!listingTypes.has(mcp.listingType)) {
     fail(`${prefix}.listingType must be "live" or "example"`);
   }
+  if (
+    typeof mcp.trialSupported !== "undefined" &&
+    typeof mcp.trialSupported !== "boolean"
+  ) {
+    fail(`${prefix}.trialSupported must be a boolean when provided`);
+  }
 
   try {
     const endpointUrl = new URL(mcp.endpoint);

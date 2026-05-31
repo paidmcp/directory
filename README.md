@@ -2,7 +2,10 @@
 
 Next.js directory site for discoverability of paid MCP servers.
 
-End users connect to listed MCPs through the client proxy documented in [`../client/README.md`](../client/README.md).
+End users can connect:
+
+- natively to MCP (`<endpoint>/mcp`)
+- via managed wallet mode (`paidmcp-client`) for spend caps/confirmations
 
 ## Listing categories
 
@@ -10,6 +13,14 @@ End users connect to listed MCPs through the client proxy documented in [`../cli
 - `listingType: "example"` for reference/demo MCPs from PaidMCP examples.
 
 The homepage renders these sections separately.
+
+## User-facing features
+
+- Card-level quick-connect copy button
+- Native and managed install snippets on detail pages
+- Search and chain filters
+- Connect walkthrough at `/connect`
+- Optional Plausible analytics via `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`
 
 ## Commands
 
@@ -28,6 +39,7 @@ Listings are stored in `directory.json` and updated via pull requests.
 2. Add your MCP object to `directory.json` under `mcps`.
 3. Use `listingType: "live"` for real public services.
 4. Open a PR with endpoint, pricing, and maintainer contact.
+5. Optionally set `trialSupported: true` if your MCP supports free testnet onboarding.
 
 ### PR checklist (copy into PR body)
 

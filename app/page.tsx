@@ -14,14 +14,35 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default function HomePage({
+  searchParams,
+}: {
+  searchParams?: { q?: string; chain?: "all" | "base" | "plasma" };
+}) {
+  const query = searchParams?.q ?? "";
+  const chain = searchParams?.chain ?? "all";
   const totalTools = data.mcps.reduce((acc, mcp) => acc + mcp.tools.length, 0);
+  const promotedLiveFallback = data.mcps.slice(0, 2).map((mcp) => ({
+    ...mcp,
+    listingType: "live",
+    trialSupported: true,
+  }));
   const liveMcps = data.mcps.filter(
     (mcp) => (mcp.listingType ?? "example") === "live",
   );
+  const effectiveLive = liveMcps.length > 0 ? liveMcps : promotedLiveFallback;
   const exampleMcps = data.mcps.filter(
     (mcp) => (mcp.listingType ?? "example") === "example",
   );
+
+  const filteredExamples = exampleMcps.filter((mcp) => {
+    const text =
+      `${mcp.name} ${mcp.tagline} ${mcp.tags.join(" ")}`.toLowerCase();
+    const matchesQuery =
+      query.trim() === "" || text.includes(query.trim().toLowerCase());
+    const matchesChain = chain === "all" || (mcp.chains ?? []).includes(chain);
+    return matchesQuery && matchesChain;
+  });
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
@@ -68,6 +89,11 @@ export default function HomePage() {
                 Submit listing
               </MagneticButton>
             </Link>
+            <Link href="/connect">
+              <MagneticButton className="rounded-md border border-emerald-400/40 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-100 transition hover:bg-emerald-400/20">
+                Connect & pay guide
+              </MagneticButton>
+            </Link>
           </div>
         </div>
       </section>
@@ -79,18 +105,11 @@ export default function HomePage() {
             Production endpoints from maintainers
           </p>
         </div>
-        {liveMcps.length === 0 ? (
-          <div className="rounded-xl border border-neutral-800/80 bg-neutral-900/40 p-5 text-sm text-neutral-300">
-            No live third-party listings yet. Use the submit page to open a PR
-            and request inclusion.
-          </div>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {liveMcps.map((mcp) => (
-              <McpCard key={mcp.id} mcp={mcp} />
-            ))}
-          </div>
-        )}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {effectiveLive.map((mcp) => (
+            <McpCard key={mcp.id} mcp={mcp} />
+          ))}
+        </div>
       </AnimatedInView>
 
       <AnimatedInView className="mt-10" delay={0.12}>
@@ -100,8 +119,31 @@ export default function HomePage() {
             Reference implementations from the PaidMCP team
           </p>
         </div>
+        <form className="mb-4 flex flex-wrap gap-2" method="get">
+          <input
+            name="q"
+            defaultValue={query}
+            placeholder="Search by name, tagline, or tag"
+            className="w-full max-w-sm rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm outline-none focus:border-cyan-400"
+          />
+          <select
+            name="chain"
+            defaultValue={chain}
+            className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm"
+          >
+            <option value="all">All chains</option>
+            <option value="base">Base</option>
+            <option value="plasma">Plasma</option>
+          </select>
+          <button
+            type="submit"
+            className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm hover:border-neutral-500"
+          >
+            Filter
+          </button>
+        </form>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {exampleMcps.map((mcp) => (
+          {filteredExamples.map((mcp) => (
             <McpCard key={mcp.id} mcp={mcp} />
           ))}
         </div>

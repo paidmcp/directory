@@ -70,7 +70,26 @@ export default function McpDetailPage({ params }: { params: { id: string } }) {
           <p className="mt-5 text-sm text-neutral-400">
             Endpoint: {mcp.endpoint}
           </p>
+          <p className="mt-1 text-sm text-neutral-400">
+            Chains: {(mcp.chains ?? []).join(", ") || "base"}
+          </p>
           <p className="mt-1 text-sm text-neutral-400">Author: {mcp.author}</p>
+          <p className="mt-1 text-sm text-neutral-400">
+            GitHub:{" "}
+            <a
+              href={mcp.github}
+              className="text-cyan-300 hover:text-cyan-200"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {mcp.github}
+            </a>
+          </p>
+          {mcp.trialSupported ? (
+            <p className="mt-2 text-xs text-emerald-300">
+              Free testnet trial available
+            </p>
+          ) : null}
         </section>
       </AnimatedInView>
 
