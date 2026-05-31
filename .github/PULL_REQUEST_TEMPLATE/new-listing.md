@@ -25,9 +25,10 @@ Paste brief evidence here (curl response, screenshot, or logs):
 
 ```text
 # example:
-# curl -i -X POST https://your-endpoint/tools/your_tool \
+# curl -i -X POST https://your-endpoint/mcp \
+#   -H "Accept: application/json, text/event-stream" \
 #   -H "Content-Type: application/json" \
-#   -d '{"sample":"input"}'
+#   -d '{"jsonrpc":"2.0","id":"verify","method":"tools/call","params":{"name":"your_tool","arguments":{"sample":"input"}}}'
 ```
 
 ## Notes for reviewers
