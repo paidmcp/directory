@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,8 +112,62 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "twzrd-agent-intel",
+      "name": "TWZRD Agent Intel",
+      "tagline": "Trust scoring and x402 micropayment verification for AI agents on Solana",
+      "description": "Solana-native agent trust scoring and identity verification. Resolve agent wallets, score on-chain reputation, run preflight risk checks, and mint cryptographically-signed trust receipts via x402 micropayment. One of the first production MCP servers using HTTP 402 autonomous payment.",
+      "author": "twzrd-sol",
+      "github": "https://github.com/pypi.org/project/twzrd-agent-intel",
+      "endpoint": "https://intel.twzrd.xyz/mcp",
+      "listingType": "community",
+      "trialSupported": true,
+      "chains": [
+        "solana"
+      ],
+      "tools": [
+        {
+          "name": "resolve_agent",
+          "description": "Resolve Solana wallet to agent identity",
+          "priceUsdt": 0
+        },
+        {
+          "name": "score_agent",
+          "description": "Compute on-chain trust/reputation score",
+          "priceUsdt": 0
+        },
+        {
+          "name": "preflight_check",
+          "description": "Pre-transaction risk assessment",
+          "priceUsdt": 0
+        },
+        {
+          "name": "verify_trust_receipt",
+          "description": "Verify signed on-chain trust receipt",
+          "priceUsdt": 0
+        },
+        {
+          "name": "get_trust_receipt",
+          "description": "Mint trust receipt via x402 micropayment",
+          "priceUsdt": 0.01
+        }
+      ],
+      "tags": [
+        "trust",
+        "security",
+        "solana",
+        "identity",
+        "agent-verification"
+      ],
+      "addedAt": "2026-06-06"
     }
   ]
 }
