@@ -194,6 +194,11 @@
           "name": "gpt55_x402_seller_intelligence_bundle",
           "description": "x402 seller intelligence bundle",
           "priceUsdt": 0.029
+        },
+        {
+          "name": "gpt55_x402_seller_action_plan",
+          "description": "x402 seller action plan",
+          "priceUsdt": 0.019
         }
       ],
       "tags": ["ai", "llm", "x402", "mcp", "text-tools"],
