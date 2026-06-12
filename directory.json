@@ -171,9 +171,49 @@
           "priceUsdt": 0.0001
         },
         {
+          "name": "gpt55_x402_site_audit",
+          "description": "x402 site audit",
+          "priceUsdt": 0.001
+        },
+        {
           "name": "gpt55_x402_quote_inspector",
           "description": "x402 quote inspector",
           "priceUsdt": 0.0005
+        },
+        {
+          "name": "gpt55_x402_batch_quote_inspector",
+          "description": "x402 batch quote inspector",
+          "priceUsdt": 0.002
+        },
+        {
+          "name": "gpt55_x402_discovery_price_compare",
+          "description": "x402 discovery price compare",
+          "priceUsdt": 0.003
+        },
+        {
+          "name": "gpt55_x402_buyer_shortlist",
+          "description": "x402 buyer shortlist",
+          "priceUsdt": 0.005
+        },
+        {
+          "name": "gpt55_x402_bazaar_search",
+          "description": "x402 Bazaar search",
+          "priceUsdt": 0.004
+        },
+        {
+          "name": "gpt55_x402_market_benchmark",
+          "description": "x402 market benchmark",
+          "priceUsdt": 0.006
+        },
+        {
+          "name": "gpt55_x402_listing_seo_audit",
+          "description": "x402 listing SEO audit",
+          "priceUsdt": 0.008
+        },
+        {
+          "name": "gpt55_x402_opportunity_finder",
+          "description": "x402 opportunity finder",
+          "priceUsdt": 0.009
         },
         {
           "name": "gpt55_x402_directory_rank_tracker",
