@@ -189,6 +189,11 @@
           "name": "gpt55_x402_mcp_integration_kit",
           "description": "x402 MCP integration kit",
           "priceUsdt": 0.006
+        },
+        {
+          "name": "gpt55_x402_seller_intelligence_bundle",
+          "description": "x402 seller intelligence bundle",
+          "priceUsdt": 0.029
         }
       ],
       "tags": ["ai", "llm", "x402", "mcp", "text-tools"],
