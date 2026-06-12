@@ -97,6 +97,102 @@
       ],
       "tags": ["spain", "tax", "bureaucracy", "llm"],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "gpt55-x402-gateway",
+      "name": "GPT-5.5 x402 Gateway",
+      "tagline": "Low-cost GPT-5.5 chat and x402/MCP text tools for AI agents",
+      "description": "OpenAI-compatible GPT-5.5 chat plus deterministic text, URL, JSON, and x402 seller tools. Agents can connect over MCP and pay per call in USDC on Base via x402 with transparent live pricing.",
+      "author": "GPT55 Token Gateway",
+      "github": "https://github.com/go165/gpt55-x402-gateway",
+      "endpoint": "https://gpt55.558686.xyz",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "gpt55_chat_completion",
+          "description": "GPT-5.5 chat completion",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_long_chat_completion",
+          "description": "GPT-5.5 long chat completion",
+          "priceUsdt": 0.002134
+        },
+        {
+          "name": "gpt55_max_chat_completion",
+          "description": "GPT-5.5 max-output chat completion",
+          "priceUsdt": 0.066667
+        },
+        {
+          "name": "gpt55_summarize",
+          "description": "Summarize text",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_translate",
+          "description": "Translate text",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_rewrite",
+          "description": "Rewrite text",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_answer",
+          "description": "Answer a question",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_code_review",
+          "description": "Review code",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_extract_json",
+          "description": "Extract JSON",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_url_metadata",
+          "description": "URL metadata",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_url_text",
+          "description": "URL text",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_url_links",
+          "description": "URL links",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_x402_quote_inspector",
+          "description": "x402 quote inspector",
+          "priceUsdt": 0.0005
+        },
+        {
+          "name": "gpt55_x402_directory_rank_tracker",
+          "description": "x402 directory rank tracker",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "gpt55_json_validate",
+          "description": "JSON validate",
+          "priceUsdt": 0.0001
+        },
+        {
+          "name": "gpt55_x402_mcp_integration_kit",
+          "description": "x402 MCP integration kit",
+          "priceUsdt": 0.006
+        }
+      ],
+      "tags": ["ai", "llm", "x402", "mcp", "text-tools"],
+      "addedAt": "2026-06-12"
     }
   ]
 }
