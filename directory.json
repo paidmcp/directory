@@ -100,9 +100,9 @@
     },
     {
       "id": "gpt55-x402-gateway",
-      "name": "GPT-5.5 x402 Gateway",
-      "tagline": "Low-cost GPT-5.5 chat and x402/MCP text tools for AI agents",
-      "description": "OpenAI-compatible GPT-5.5 chat plus deterministic text, URL, JSON, and x402 seller tools. Agents can connect over MCP and pay per call in USDC on Base via x402 with transparent live pricing.",
+      "name": "GPT55 x402 Agent Tools",
+      "tagline": "Low-cost x402/MCP chat-request and utility tools for AI agents",
+      "description": "OpenAI-compatible chat request handling plus deterministic text, URL, JSON, and x402 seller tools. Agents can connect over MCP and pay per call in USDC on Base via x402 with transparent live pricing.",
       "author": "GPT55 Token Gateway",
       "github": "https://github.com/go165/gpt55-x402-gateway",
       "endpoint": "https://gpt55.558686.xyz",
@@ -112,17 +112,17 @@
       "tools": [
         {
           "name": "gpt55_chat_completion",
-          "description": "GPT-5.5 chat completion",
+          "description": "OpenAI-compatible compact chat completion",
           "priceUsdt": 0.0001
         },
         {
           "name": "gpt55_long_chat_completion",
-          "description": "GPT-5.5 long chat completion",
+          "description": "OpenAI-compatible long chat completion",
           "priceUsdt": 0.002134
         },
         {
           "name": "gpt55_max_chat_completion",
-          "description": "GPT-5.5 max-output chat completion",
+          "description": "OpenAI-compatible max-output chat completion",
           "priceUsdt": 0.066667
         },
         {
