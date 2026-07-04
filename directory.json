@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,8 +112,63 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "aiservices",
+      "name": "AIServices",
+      "tagline": "Paid APIs for AI agents with built-in trust and dispute resolution",
+      "description": "29-service API platform for AI agents: real-time crypto prices, DeFi yields, on-chain analytics, whale tracking, and policy-driven dispute resolution. All paid endpoints use x402 USDC micropayments on Base.",
+      "author": "vbkotecha",
+      "github": "https://github.com/vbkotecha/aiservices-api",
+      "endpoint": "https://api.aiservices.to/mcp",
+      "listingType": "community",
+      "trialSupported": true,
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "get_indicators",
+          "description": "RSI, MACD, SMA, EMA, Bollinger Bands",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "get_defi_yields",
+          "description": "Top DeFi pool APYs across chains",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "get_url_metadata",
+          "description": "Rich link previews with OpenGraph",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "search",
+          "description": "Web search optimized for AI agents",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "resolve_dispute",
+          "description": "Policy-driven dispute resolution with 7 templates",
+          "priceUsdt": 0.05
+        }
+      ],
+      "tags": [
+        "crypto",
+        "defi",
+        "dispute-resolution",
+        "data",
+        "x402",
+        "mcp"
+      ],
+      "addedAt": "2026-07-04"
     }
   ]
 }
