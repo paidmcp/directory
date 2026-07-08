@@ -169,6 +169,81 @@
         "mcp"
       ],
       "addedAt": "2026-07-04"
+    },
+    {
+      "id": "agentservices",
+      "name": "AgentServices",
+      "tagline": "50+ paid API endpoints for AI agents \u2014 crypto data, market intelligence, search, inference, and DeFi analytics",
+      "description": "AgentServices provides 50+ API endpoints that agents discover and pay for via x402 micropayments (USDC on Base). Covers crypto prices, technical indicators, DeFi yields, market sentiment, portfolio intelligence, DeFi strategy, on-chain analytics, cross-DEX arbitrage scanning, AI inference, web search, and dispute resolution. 11 endpoints are free, 39 are paid ($0.01-$0.25/call). Also provides 37 MCP tools for direct Claude/Cursor/Cline integration.",
+      "author": "vbkotecha",
+      "github": "https://github.com/vbkotecha/aiservices-api",
+      "endpoint": "https://agentservices.to",
+      "listingType": "third-party",
+      "trialSupported": true,
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "crypto_prices",
+          "description": "Real-time crypto prices (BTC, ETH, 100+)",
+          "priceUsdt": 0
+        },
+        {
+          "name": "technical_indicators",
+          "description": "RSI, MACD, Bollinger Bands, moving averages",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "defi_yields",
+          "description": "Top DeFi yields across protocols",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "portfolio_intelligence",
+          "description": "Aggregated portfolio analysis with risk + sentiment",
+          "priceUsdt": 0.1
+        },
+        {
+          "name": "market_pulse",
+          "description": "Fear/greed + trending + news + whales in one call",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "defi_strategy",
+          "description": "Cross-protocol yield comparison + risk assessment",
+          "priceUsdt": 0.25
+        },
+        {
+          "name": "onchain_overview",
+          "description": "Whale flows + exchange flows + stablecoin flows + TVL",
+          "priceUsdt": 0.15
+        },
+        {
+          "name": "arbitrage_scan",
+          "description": "Cross-DEX arbitrage opportunity detection with profitability modeling",
+          "priceUsdt": 0.08
+        },
+        {
+          "name": "research",
+          "description": "Search + extract + synthesize in one call",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "ai_inference",
+          "description": "LLM inference (GPT, Claude, Gemini models)",
+          "priceUsdt": 0.03
+        }
+      ],
+      "tags": [
+        "crypto",
+        "data",
+        "defi",
+        "market-intelligence",
+        "inference",
+        "search"
+      ],
+      "addedAt": "2026-07-08"
     }
   ]
 }
