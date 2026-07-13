@@ -122,12 +122,12 @@
     },
     {
       "id": "aiservices",
-      "name": "AIServices",
+      "name": "AgentServices",
       "tagline": "Paid APIs for AI agents with built-in trust and dispute resolution",
       "description": "29-service API platform for AI agents: real-time crypto prices, DeFi yields, on-chain analytics, whale tracking, and policy-driven dispute resolution. All paid endpoints use x402 USDC micropayments on Base.",
       "author": "vbkotecha",
       "github": "https://github.com/vbkotecha/aiservices-api",
-      "endpoint": "https://api.aiservices.to/mcp",
+      "endpoint": "https://agentservices.to/mcp",
       "listingType": "community",
       "trialSupported": true,
       "chains": [
