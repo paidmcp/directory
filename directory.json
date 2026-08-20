@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,8 +112,41 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "oedon-package-exists",
+      "name": "OEDON",
+      "tagline": "Verifiable package existence oracle for AI agents",
+      "description": "Checks whether a package exists in PyPI, npm, crates.io, or RubyGems. Returns existence, latest version, and verification timestamp. Independently verifiable \u2014 query the same registry API.",
+      "author": "oedon",
+      "github": "https://github.com/mkKouarti",
+      "endpoint": "https://oedon.dev",
+      "listingType": "community",
+      "trialSupported": false,
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "package_exists",
+          "description": "Check if a package exists in a public registry (PyPI, npm, crates.io, RubyGems)",
+          "priceUsdt": 0.001
+        }
+      ],
+      "tags": [
+        "packages",
+        "verification",
+        "security",
+        "dependencies"
+      ],
+      "addedAt": "2026-08-20"
     }
   ]
 }
