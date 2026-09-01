@@ -124,7 +124,7 @@
       "id": "argo-hub-inference",
       "name": "Argo Hub Inference",
       "tagline": "Self-hosted 27B LLM inference, machine-payable via x402",
-      "description": "Premium LLM completions on a self-hosted Qwen3.8-27B (RTX 5090 homelab). Fully self-hosted x402 stack incl. own facilitator \u2014 no middleman. Zero prompt retention; settlement after delivery; failed requests never charged. Free trial: 3 calls per wallet.",
+      "description": "Premium LLM completions on a self-hosted Qwen3.8-27B (RTX 5090 homelab). Fully self-hosted x402 stack incl. own facilitator — no middleman. Zero prompt retention; settlement after delivery; failed requests never charged. Free trial: 3 calls per wallet.",
       "author": "Runuk",
       "github": "https://github.com/Runuk/argo-x402-reference",
       "endpoint": "https://diomedes.tail1c6d58.ts.net",
@@ -141,12 +141,12 @@
         },
         {
           "name": "premium_deep",
-          "description": "8K tokens, smart-routes to frontier models when warranted",
+          "description": "8K tokens — double the thinking budget on the same 27B model",
           "priceUsdt": 0.05
         },
         {
           "name": "premium_vl",
-          "description": "30B vision model \u2014 image understanding via image_url",
+          "description": "30B vision model — image understanding via image_url",
           "priceUsdt": 0.1
         },
         {
