@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,8 +112,50 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "argo-hub-inference",
+      "name": "Argo Hub Inference",
+      "tagline": "Self-hosted 27B LLM inference, machine-payable via x402",
+      "description": "Premium LLM completions on a self-hosted Qwen3.8-27B (RTX 5090 homelab). Fully self-hosted x402 stack incl. own facilitator — no middleman. Zero prompt retention; settlement after delivery; failed requests never charged. Free trial: 3 calls per wallet.",
+      "author": "Runuk",
+      "github": "https://github.com/Runuk/argo-x402-reference",
+      "endpoint": "https://diomedes.tail1c6d58.ts.net",
+      "listingType": "live",
+      "trialSupported": true,
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "premium_llm",
+          "description": "27B completion, 4K token cap, ~2s",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "premium_deep",
+          "description": "8K tokens — double the thinking budget on the same 27B model",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "premium_vl",
+          "description": "30B vision model — image understanding via image_url",
+          "priceUsdt": 0.1
+        },
+        {
+          "name": "premium_balance",
+          "description": "Free: live on-chain earnings readout",
+          "priceUsdt": 0
+        }
+      ],
+      "maintainer": "https://github.com/Runuk"
     }
   ]
 }
