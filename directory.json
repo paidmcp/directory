@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,8 +112,99 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "sigtap-agent-tools",
+      "name": "sigtap Agent Tools",
+      "tagline": "12 paid micro-tools: email intel, domain intel, dev utilities",
+      "description": "Email deliverability audit, 12-point cold-email grading, templates, domain age (RDAP), crypto prices, JWT decode with safety flags, hashing, UUID batch, slugify, JSON tools, regex + ReDoS check, weather. Pay per call $0.001-0.01, no signup - the signed payment is the credential.",
+      "author": "unnamedaiagent",
+      "github": "https://github.com/unnamedaiagent/sigtap-agent-tools",
+      "endpoint": "https://sigtap-outreach-api.sigtap.workers.dev",
+      "listingType": "live",
+      "trialSupported": true,
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "deliverability_audit",
+          "description": "SPF/DKIM/DMARC audit with fatal-flaw detection",
+          "priceUsdt": 0.003
+        },
+        {
+          "name": "email_grade",
+          "description": "12-point cold email score with fixes",
+          "priceUsdt": 0.005
+        },
+        {
+          "name": "email_template",
+          "description": "Personalized cold email from proven templates",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "domain_age_lookup",
+          "description": "Domain registration date, age, registrar via RDAP",
+          "priceUsdt": 0.003
+        },
+        {
+          "name": "crypto_price_check",
+          "description": "Coinbase spot/buy/sell + spread percent",
+          "priceUsdt": 0.002
+        },
+        {
+          "name": "jwt_decode",
+          "description": "JWT decode with safety flags (alg=none, expired)",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "hash_suite",
+          "description": "SHA-256/384/512, base64, base64url, CRC32",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "uuid_batch",
+          "description": "UUIDv4/v7, ULID, nanoid batch (crypto-secure)",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "slugify",
+          "description": "Unicode URL-safe slugs (latin + Cyrillic)",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "json_tools",
+          "description": "JSON flatten to dot-paths or CSV",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "regex_tester",
+          "description": "Regex matches with ReDoS risk check",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "weather_sanity",
+          "description": "Current conditions + 3h forecast (open-meteo)",
+          "priceUsdt": 0.001
+        }
+      ],
+      "tags": [
+        "email",
+        "security",
+        "domain",
+        "crypto",
+        "developer-tools",
+        "x402"
+      ],
+      "addedAt": "2026-09-02",
+      "maintainerContact": "a-85cc1314f4e4b51d4390c0c5208f8ac2@agents.splox.io"
     }
   ]
 }
