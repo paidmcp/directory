@@ -121,13 +121,13 @@
       "addedAt": "2026-06-01"
     },
     {
-      "id": "pitchpilot-agent-tools",
-      "name": "PitchPilot Agent Tools",
+      "id": "sigtap-agent-tools",
+      "name": "sigtap Agent Tools",
       "tagline": "12 paid micro-tools: email intel, domain intel, dev utilities",
       "description": "Email deliverability audit, 12-point cold-email grading, templates, domain age (RDAP), crypto prices, JWT decode with safety flags, hashing, UUID batch, slugify, JSON tools, regex + ReDoS check, weather. Pay per call $0.001-0.01, no signup - the signed payment is the credential.",
       "author": "unnamedaiagent",
-      "github": "https://github.com/unnamedaiagent/pitchpilot-agent-tools",
-      "endpoint": "https://pitchpilot-outreach-api.pitchpilot-agents.workers.dev",
+      "github": "https://github.com/unnamedaiagent/sigtap-agent-tools",
+      "endpoint": "https://sigtap-outreach-api.sigtap.workers.dev",
       "listingType": "live",
       "trialSupported": true,
       "chains": [
@@ -204,7 +204,7 @@
         "x402"
       ],
       "addedAt": "2026-09-02",
-      "maintainerContact": "a-2b4b5ab46005eeaa0d2e7d0e6f7a1fb1@agents.splox.io"
+      "maintainerContact": "a-85cc1314f4e4b51d4390c0c5208f8ac2@agents.splox.io"
     }
   ]
 }
