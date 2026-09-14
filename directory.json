@@ -97,6 +97,66 @@
       ],
       "tags": ["spain", "tax", "bureaucracy", "llm"],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "penniless-data-utilities",
+      "name": "Penniless Data Utilities",
+      "tagline": "Nine deterministic x402-paid data utilities for AI agents (USDC on Base)",
+      "description": "Repairs malformed LLM JSON, converts YAML to JSON, computes cron next-run, produces unified diffs, extracts text/links/emails from HTML, WHOIS lookup, DNS over HTTPS, GitHub repo stats, email validation. One price, $0.001 USDC on Base, for all tools over REST or MCP.",
+      "author": "danielarif26",
+      "github": "https://github.com/danielarif26/penniless-data-utilities",
+      "endpoint": "https://penniless-json-repair.sjaman.workers.dev",
+      "listingType": "live",
+      "chains": ["base"],
+      "tags": ["json", "yaml", "dns", "whois", "diff", "text-extraction", "github", "email", "agent-tools"],
+      "addedAt": "2026-09-14",
+      "tools": [
+        {
+          "name": "repair_json",
+          "description": "Repairs malformed LLM JSON (fences, trailing commas, Python literals, truncated output)",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "yaml_to_json",
+          "description": "Convert a YAML subset to JSON",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "cron_next_run",
+          "description": "Next UTC fire time for a 5-field cron expression",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "text_diff",
+          "description": "Unified diff plus added/removed counts between two texts",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "text_extract",
+          "description": "Extract text, title, headings, links, URLs, and emails from HTML",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "domain_whois",
+          "description": "Structured WHOIS via RDAP: registrar, statuses, expiry, nameservers",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "dns_lookup",
+          "description": "DNS-over-HTTPS lookup for A, AAAA, CNAME, MX, TXT, NS, SOA, PTR, SRV, CAA",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "github_repo_stats",
+          "description": "Stars, forks, open issues, language, license, last push for a public repo",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "email_validate",
+          "description": "Email syntax check plus live MX deliverability probe",
+          "priceUsdt": 0.001
+        }
+      ]
     }
   ]
 }
