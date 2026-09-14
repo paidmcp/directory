@@ -97,6 +97,67 @@
       ],
       "tags": ["spain", "tax", "bureaucracy", "llm"],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "penniless-data-utilities",
+      "name": "Penniless Data Utilities",
+      "tagline": "Deterministic data tools for AI agents paid per call in USDC on Base",
+      "description": "Data and lookup tools for AI agents - repair malformed JSON, convert YAML to JSON, compute cron next runs, diff text, extract links/emails, WHOIS lookup, DNS lookup, GitHub repo stats, and email validation. All paid per call in USDC on Base mainnet via x402.",
+      "author": "Echolonius",
+      "github": "https://github.com/Echolonius/the-penniless-agent",
+      "endpoint": "https://penniless-json-repair.sjaman.workers.dev/mcp",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "repair_json",
+          "description": "Repair malformed or truncated near-JSON",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "yaml_to_json",
+          "description": "Convert YAML to JSON",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "cron_next_run",
+          "description": "Compute the next run time for a cron expression",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "diff_text",
+          "description": "Compare two text values",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "extract_text",
+          "description": "Extract structured information such as links, emails, headings",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "domain_whois",
+          "description": "WHOIS domain lookup",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "dns_lookup",
+          "description": "DNS record lookup",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "github_repo_stats",
+          "description": "GitHub repository popularity and metadata",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "email_validate",
+          "description": "Email syntax and MX deliverability check",
+          "priceUsdt": 0.001
+        }
+      ],
+      "tags": ["data", "utilities", "x402", "agent-commerce"],
+      "addedAt": "2026-09-14"
     }
   ]
 }
