@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,8 +112,72 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "47620-blockchain-data",
+      "name": "47620 Blockchain Data + MCP Trust",
+      "tagline": "Pay-per-call onchain data (Solana, Base, Polygon) and MCP server trust checks for agents",
+      "description": "Non-custodial x402 data API for AI agents: live network health, gas, trending tokens and market data across Solana, Base and Polygon; plus an MCP Server Trust Check that scores whether an MCP server is safe to connect to. Pay USDC per call on Base, Polygon or Solana. No signup, no API key.",
+      "author": "47620.xyz",
+      "github": "https://github.com/fito311/solana-data-mcp",
+      "endpoint": "https://47620.xyz/mcp",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": [
+        "base",
+        "polygon",
+        "solana"
+      ],
+      "tools": [
+        {
+          "name": "solana_health",
+          "description": "Solana network health: slot, epoch, TPS, validator count, SOL price",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "solana_trending",
+          "description": "Trending Solana DEX pairs with price, volume and liquidity",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "base_health",
+          "description": "Base network health: block number, gas price, chain status",
+          "priceUsdt": 0.002
+        },
+        {
+          "name": "base_trending",
+          "description": "Trending tokens on Base with price, volume and liquidity",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "polygon_health",
+          "description": "Polygon network health: block number, gas price, chain status",
+          "priceUsdt": 0.002
+        },
+        {
+          "name": "mcp_server_trust",
+          "description": "MCP server trust score (0-100), verdict and security findings before connecting",
+          "priceUsdt": 0.005
+        }
+      ],
+      "tags": [
+        "crypto",
+        "blockchain",
+        "data",
+        "solana",
+        "base",
+        "polygon",
+        "security",
+        "mcp"
+      ],
+      "addedAt": "2026-09-24"
     }
   ]
 }
