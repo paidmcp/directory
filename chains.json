@@ -1,0 +1,11 @@
+{
+  "chains": [
+    { "id": "base", "label": "Base" },
+    { "id": "plasma", "label": "Plasma" },
+    { "id": "solana", "label": "Solana" },
+    { "id": "polygon", "label": "Polygon" },
+    { "id": "arbitrum", "label": "Arbitrum" },
+    { "id": "optimism", "label": "Optimism" },
+    { "id": "avalanche", "label": "Avalanche" }
+  ]
+}

@@ -21,7 +21,7 @@ export default function SubmitPage() {
   "endpoint": "https://your-mcp.example.com",
   "listingType": "live",
   "trialSupported": true,
-  "chains": ["base", "plasma"],
+  "chains": ["base"],
   "tools": [
     { "name": "your_tool", "description": "What it does", "priceUsdt": 0.01 }
   ],

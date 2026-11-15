@@ -41,6 +41,17 @@ Listings are stored in `directory.json` and updated via pull requests.
 4. Open a PR with endpoint, pricing, and maintainer contact.
 5. Optionally set `trialSupported: true` if your MCP supports free testnet onboarding.
 
+### Listing rules
+
+`pnpm run validate:data` enforces these, and CI runs it on every PR:
+
+- `endpoint` is the HTTPS base URL. Clients connect to `<endpoint>/mcp`, so don't include `/mcp`.
+- `chains` must come from `chains.json` and list only chains your endpoint accepts payment on (max 4). To request a new chain, open a PR that adds it to `chains.json` along with a live listing that uses it.
+- `tools` lists paid tools only (positive `priceUsdt`, max 30), with names matching your live `tools/list`.
+- Up to 8 lowercase `tags`. `id` is a lowercase slug.
+- Only the documented fields are accepted. Put maintainer contact in the PR body and your project README.
+- One PR per listing. Listings whose endpoint stops responding may be removed.
+
 ### PR checklist (copy into PR body)
 
 - [ ] Added a single valid JSON object under `mcps` in `directory.json`

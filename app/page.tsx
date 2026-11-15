@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AnimatedInView } from "../components/AnimatedInView";
 import { MagneticButton } from "../components/MagneticButton";
 import data from "../directory.json";
+import chainConfig from "../chains.json";
 import { McpCard } from "../components/McpCard";
 
 export const metadata: Metadata = {
@@ -14,13 +15,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage({
+export default async function HomePage({
   searchParams,
 }: {
-  searchParams?: { q?: string; chain?: "all" | "base" | "plasma" };
+  searchParams: Promise<{ q?: string | string[]; chain?: string | string[] }>;
 }) {
-  const query = searchParams?.q ?? "";
-  const chain = searchParams?.chain ?? "all";
+  const params = await searchParams;
+  const first = (value?: string | string[]) =>
+    Array.isArray(value) ? value[0] : value;
+  const query = first(params.q) ?? "";
+  const requestedChain = first(params.chain) ?? "all";
+  const chain = chainConfig.chains.some((c) => c.id === requestedChain)
+    ? requestedChain
+    : "all";
+  const listedChains = new Set(data.mcps.flatMap((mcp) => mcp.chains ?? []));
+  const chainOptions = chainConfig.chains.filter((c) => listedChains.has(c.id));
   const totalTools = data.mcps.reduce((acc, mcp) => acc + mcp.tools.length, 0);
   const promotedLiveFallback = data.mcps.slice(0, 2).map((mcp) => ({
     ...mcp,
@@ -35,14 +44,23 @@ export default function HomePage({
     (mcp) => (mcp.listingType ?? "example") === "example",
   );
 
-  const filteredExamples = exampleMcps.filter((mcp) => {
-    const text =
-      `${mcp.name} ${mcp.tagline} ${mcp.tags.join(" ")}`.toLowerCase();
+  const matchesFilters = (mcp: (typeof data.mcps)[number]) => {
+    const text = [
+      mcp.name,
+      mcp.tagline,
+      mcp.description,
+      ...mcp.tags,
+      ...mcp.tools.map((tool) => tool.name),
+    ]
+      .join(" ")
+      .toLowerCase();
     const matchesQuery =
       query.trim() === "" || text.includes(query.trim().toLowerCase());
     const matchesChain = chain === "all" || (mcp.chains ?? []).includes(chain);
     return matchesQuery && matchesChain;
-  });
+  };
+  const filteredLive = effectiveLive.filter(matchesFilters);
+  const filteredExamples = exampleMcps.filter(matchesFilters);
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
@@ -98,6 +116,33 @@ export default function HomePage({
         </div>
       </section>
 
+      <form className="mt-10 flex flex-wrap gap-2" method="get">
+        <input
+          name="q"
+          defaultValue={query}
+          placeholder="Search by name, tag, or tool"
+          className="w-full max-w-sm rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm outline-none focus:border-cyan-400"
+        />
+        <select
+          name="chain"
+          defaultValue={chain}
+          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm"
+        >
+          <option value="all">All chains</option>
+          {chainOptions.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.label}
+            </option>
+          ))}
+        </select>
+        <button
+          type="submit"
+          className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm hover:border-neutral-500"
+        >
+          Filter
+        </button>
+      </form>
+
       <AnimatedInView className="mt-10" delay={0.08}>
         <div className="mb-5 flex items-center justify-between">
           <h2 className="text-2xl font-semibold">Live paid MCPs</h2>
@@ -106,10 +151,15 @@ export default function HomePage({
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {effectiveLive.map((mcp) => (
+          {filteredLive.map((mcp) => (
             <McpCard key={mcp.id} mcp={mcp} />
           ))}
         </div>
+        {filteredLive.length === 0 ? (
+          <p className="text-sm text-neutral-400">
+            No live MCPs match these filters.
+          </p>
+        ) : null}
       </AnimatedInView>
 
       <AnimatedInView className="mt-10" delay={0.12}>
@@ -119,29 +169,6 @@ export default function HomePage({
             Reference implementations from the PaidMCP team
           </p>
         </div>
-        <form className="mb-4 flex flex-wrap gap-2" method="get">
-          <input
-            name="q"
-            defaultValue={query}
-            placeholder="Search by name, tagline, or tag"
-            className="w-full max-w-sm rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm outline-none focus:border-cyan-400"
-          />
-          <select
-            name="chain"
-            defaultValue={chain}
-            className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm"
-          >
-            <option value="all">All chains</option>
-            <option value="base">Base</option>
-            <option value="plasma">Plasma</option>
-          </select>
-          <button
-            type="submit"
-            className="rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm hover:border-neutral-500"
-          >
-            Filter
-          </button>
-        </form>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filteredExamples.map((mcp) => (
             <McpCard key={mcp.id} mcp={mcp} />

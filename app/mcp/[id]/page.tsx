@@ -10,12 +10,13 @@ export function generateStaticParams() {
   return data.mcps.map((mcp) => ({ id: mcp.id }));
 }
 
-export function generateMetadata({
+type PageProps = { params: Promise<{ id: string }> };
+
+export async function generateMetadata({
   params,
-}: {
-  params: { id: string };
-}): Metadata {
-  const mcp = data.mcps.find((item) => item.id === params.id);
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const mcp = data.mcps.find((item) => item.id === id);
   if (!mcp) {
     return { title: "MCP not found" };
   }
@@ -33,8 +34,8 @@ export function generateMetadata({
   };
 }
 
-export default function McpDetailPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function McpDetailPage({ params }: PageProps) {
+  const { id } = await params;
   const mcp = data.mcps.find((item) => item.id === id);
   if (!mcp) {
     return <main className="mx-auto max-w-4xl px-6 py-12">MCP not found.</main>;
