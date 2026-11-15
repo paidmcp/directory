@@ -3,6 +3,7 @@ import { AnimatedInView } from "../../../components/AnimatedInView";
 import data from "../../../directory.json";
 import { InstallSnippet } from "../../../components/InstallSnippet";
 import { PricingTable } from "../../../components/PricingTable";
+import { paymentOptions } from "../../../components/chains";
 
 export const dynamicParams = false;
 
@@ -72,7 +73,7 @@ export default async function McpDetailPage({ params }: PageProps) {
             Endpoint: {mcp.endpoint}
           </p>
           <p className="mt-1 text-sm text-neutral-400">
-            Chains: {(mcp.chains ?? []).join(", ") || "base"}
+            Pay with: {paymentOptions(mcp.chains) || "USDC on Base"}
           </p>
           <p className="mt-1 text-sm text-neutral-400">Author: {mcp.author}</p>
           <p className="mt-1 text-sm text-neutral-400">

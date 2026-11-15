@@ -11,7 +11,7 @@ export function PricingTable({ tools }: { tools: Tool[] }) {
               Description
             </th>
             <th className="px-4 py-3 text-left text-neutral-200">
-              Price (USDT)
+              Price per call (USD)
             </th>
           </tr>
         </thead>

@@ -1,0 +1,33 @@
+name: Report a broken or wrong listing
+description: A listed MCP is down, charges a different price, or its details are out of date.
+title: "Listing problem: "
+labels: ["listing-problem"]
+body:
+  - type: input
+    id: listing
+    attributes:
+      label: Listing id
+      description: The `id` from directory.json, or the last part of the listing URL (paidmcp.dev/mcp/<id>).
+      placeholder: sigtap-agent-tools
+    validations:
+      required: true
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What's wrong?
+      options:
+        - Endpoint is down or not responding
+        - Unpaid calls don't return an x402 payment requirement
+        - Prices or tools differ from the listing
+        - Description or other details are wrong
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What you saw, and when. Include a request and response if you have one, with any secrets removed.
+      render: text
+    validations:
+      required: true

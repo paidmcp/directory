@@ -14,6 +14,9 @@ on:
       - "tsconfig.json"
       - ".github/workflows/pr-checks.yml"
 
+permissions:
+  contents: read
+
 jobs:
   validate-and-build:
     runs-on: ubuntu-latest
@@ -43,3 +46,27 @@ jobs:
 
       - name: Build
         run: pnpm run build
+
+  verify-endpoints:
+    # Calls each new or changed listing's live endpoint: MCP must answer,
+    # listed tools must exist, and an unpaid call must ask for x402 payment.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Load base directory.json
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git fetch --depth=1 origin "$BASE_REF"
+          git show "origin/$BASE_REF:directory.json" > "$RUNNER_TEMP/base-directory.json"
+
+      - name: Check new and changed listings
+        run: node scripts/check-endpoints.mjs --changed "$RUNNER_TEMP/base-directory.json"

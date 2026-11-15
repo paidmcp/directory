@@ -72,7 +72,17 @@ const chainConfig = readJson(chainsPath, "chains.json");
 if (!chainConfig || !Array.isArray(chainConfig.chains)) {
   fail('chains.json must have a top-level "chains" array');
 }
+for (const [index, chain] of chainConfig.chains.entries()) {
+  for (const field of ["id", "label", "token"]) {
+    if (typeof chain?.[field] !== "string" || chain[field].trim() === "") {
+      fail(`chains.json chains[${index}].${field} must be a non-empty string`);
+    }
+  }
+}
 const chains = new Set(chainConfig.chains.map((chain) => chain.id));
+if (chains.size !== chainConfig.chains.length) {
+  fail("chains.json contains duplicate chain ids");
+}
 
 if (!parsed || !Array.isArray(parsed.mcps)) {
   fail('top-level "mcps" must be an array');

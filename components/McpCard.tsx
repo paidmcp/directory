@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { paymentOptions } from "./chains";
 
 type Tool = { name: string; description: string; priceUsdt: number };
 type Mcp = {
@@ -61,7 +62,7 @@ export function McpCard({ mcp }: { mcp: Mcp }) {
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold text-neutral-100">{mcp.name}</h3>
-        <div className="flex gap-2">
+        <div className="flex shrink-0 gap-2 whitespace-nowrap">
           <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-1 font-mono text-[11px] text-emerald-200">
             {mcp.tools.length} tools
           </span>
@@ -78,11 +79,11 @@ export function McpCard({ mcp }: { mcp: Mcp }) {
       </div>
       <p className="mt-2 text-sm text-neutral-300">{mcp.tagline}</p>
       <p className="mt-3 font-mono text-xs text-neutral-400">
-        Price range: ${min} - ${max} USDT
+        {min === max ? `$${min}` : `$${min} - $${max}`} per call
       </p>
       {mcp.chains && mcp.chains.length > 0 ? (
         <p className="mt-1 text-xs text-neutral-400">
-          Chains: {mcp.chains.join(", ")}
+          Pay with {paymentOptions(mcp.chains)}
         </p>
       ) : null}
       <div className="mt-4 flex gap-2">

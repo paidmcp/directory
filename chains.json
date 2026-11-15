@@ -1,11 +1,39 @@
 {
   "chains": [
-    { "id": "base", "label": "Base" },
-    { "id": "plasma", "label": "Plasma" },
-    { "id": "solana", "label": "Solana" },
-    { "id": "polygon", "label": "Polygon" },
-    { "id": "arbitrum", "label": "Arbitrum" },
-    { "id": "optimism", "label": "Optimism" },
-    { "id": "avalanche", "label": "Avalanche" }
+    {
+      "id": "base",
+      "label": "Base",
+      "token": "USDC"
+    },
+    {
+      "id": "plasma",
+      "label": "Plasma",
+      "token": "USDT0"
+    },
+    {
+      "id": "solana",
+      "label": "Solana",
+      "token": "USDC"
+    },
+    {
+      "id": "polygon",
+      "label": "Polygon",
+      "token": "USDC"
+    },
+    {
+      "id": "arbitrum",
+      "label": "Arbitrum",
+      "token": "USDC"
+    },
+    {
+      "id": "optimism",
+      "label": "Optimism",
+      "token": "USDC"
+    },
+    {
+      "id": "avalanche",
+      "label": "Avalanche",
+      "token": "USDC"
+    }
   ]
 }

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Submit or update a listing
+    url: https://github.com/paidmcp/directory#how-to-request-a-listing
+    about: Listings are added by pull request to directory.json, which lets CI validate the entry and check the endpoint. Please don't open an issue for this.
+  - name: Report a security vulnerability
+    url: https://github.com/paidmcp/directory/security/advisories/new
+    about: Report privately. Please don't post exploit details in a public issue.

@@ -20,7 +20,8 @@ export default function BuildPage() {
           <h1 className="text-3xl font-semibold">Build your own paid MCP</h1>
           <p className="mt-4 text-neutral-300">
             Start from the open template, define paid tools in one file, and
-            deploy a USDT-priced MCP endpoint.
+            deploy an MCP endpoint priced per call in US dollars and paid in
+            USDC on Base or USDT0 on Plasma.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

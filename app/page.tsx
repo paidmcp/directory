@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AnimatedInView } from "../components/AnimatedInView";
 import { MagneticButton } from "../components/MagneticButton";
 import data from "../directory.json";
-import chainConfig from "../chains.json";
+import { chains } from "../components/chains";
 import { McpCard } from "../components/McpCard";
 
 export const metadata: Metadata = {
@@ -25,11 +25,11 @@ export default async function HomePage({
     Array.isArray(value) ? value[0] : value;
   const query = first(params.q) ?? "";
   const requestedChain = first(params.chain) ?? "all";
-  const chain = chainConfig.chains.some((c) => c.id === requestedChain)
+  const chain = chains.some((c) => c.id === requestedChain)
     ? requestedChain
     : "all";
   const listedChains = new Set(data.mcps.flatMap((mcp) => mcp.chains ?? []));
-  const chainOptions = chainConfig.chains.filter((c) => listedChains.has(c.id));
+  const chainOptions = chains.filter((c) => listedChains.has(c.id));
   const totalTools = data.mcps.reduce((acc, mcp) => acc + mcp.tools.length, 0);
   const promotedLiveFallback = data.mcps.slice(0, 2).map((mcp) => ({
     ...mcp,
@@ -79,9 +79,9 @@ export default async function HomePage({
             with frictionless per-call payments.
           </h1>
           <p className="mt-4 max-w-3xl text-neutral-300">
-            Powered by x402 + Tether WDK. Build composable AI tools, price each
-            call in USDT, and ship production-ready agents without
-            subscriptions.
+            Powered by x402. Price each tool call in US dollars, get paid in
+            stablecoins (USDC on Base, USDT0 on Plasma, and more), and ship
+            production-ready agents without subscriptions.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 text-sm">
