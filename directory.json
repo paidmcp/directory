@@ -97,6 +97,199 @@
       ],
       "tags": ["spain", "tax", "bureaucracy", "llm"],
       "addedAt": "2026-06-01"
+    },
+    {
+      "id": "sigtap-agent-tools",
+      "name": "sigtap Agent Tools",
+      "tagline": "12 paid micro-tools: email intel, domain intel, dev utilities",
+      "description": "Email deliverability audit, 12-point cold-email grading, templates, domain age (RDAP), crypto prices, JWT decode with safety flags, hashing, UUID batch, slugify, JSON tools, regex with backtracking-risk check, and weather. Pay per call in USDC on Base via x402, no signup. The free catalog tool lists live prices.",
+      "author": "unnamedaiagent",
+      "github": "https://github.com/unnamedaiagent/sigtap-agent-tools",
+      "endpoint": "https://sigtap-mcp.sigtap.workers.dev",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "deliverability_audit",
+          "description": "SPF/DKIM/DMARC deliverability audit for a sending domain",
+          "priceUsdt": 0.003
+        },
+        {
+          "name": "email_grade",
+          "description": "12-point cold email score with concrete fixes",
+          "priceUsdt": 0.005
+        },
+        {
+          "name": "email_template",
+          "description": "Personalized cold email from proven templates",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "domain_age",
+          "description": "Domain registration date, age in days and registrar via RDAP",
+          "priceUsdt": 0.003
+        },
+        {
+          "name": "crypto_price",
+          "description": "Coinbase spot/buy/sell price with spread percent",
+          "priceUsdt": 0.002
+        },
+        {
+          "name": "jwt_decode",
+          "description": "Decode a JWT header and payload with safety flags (never verifies the signature)",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "hash_text",
+          "description": "SHA-256/384/512, hex, base64, base64url and CRC32 of a UTF-8 string",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "uuid_batch",
+          "description": "Batch random IDs: UUIDv4, UUIDv7, ULID or nanoid",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "slugify",
+          "description": "Unicode-aware URL-safe slug (latin + Cyrillic transliteration)",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "json_tools",
+          "description": "Flatten JSON to dot paths or convert rows to CSV",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "regex_test",
+          "description": "Regex matches with groups, count and a backtracking-risk heuristic",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "weather",
+          "description": "Current weather + next 3h temperatures (open-meteo)",
+          "priceUsdt": 0.001
+        }
+      ],
+      "tags": ["email", "domain", "developer-tools", "crypto", "x402"],
+      "addedAt": "2026-11-15"
+    },
+    {
+      "id": "penniless-data-utilities",
+      "name": "Penniless Data Utilities",
+      "tagline": "Deterministic data tools for AI agents paid per call in USDC on Base",
+      "description": "Data and lookup tools for AI agents: repair malformed JSON, convert YAML to JSON, compute cron next runs, diff text, extract links and emails, WHOIS (RDAP) lookup, DNS lookup, GitHub repo stats, and email validation. All paid per call in USDC on Base mainnet via x402.",
+      "author": "Echolonius",
+      "github": "https://github.com/Echolonius/the-penniless-agent",
+      "endpoint": "https://penniless-json-repair.sjaman.workers.dev",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "repair_json",
+          "description": "Repair malformed or truncated LLM JSON output",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "yaml_to_json",
+          "description": "Convert YAML to JSON",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "cron_next_run",
+          "description": "Compute the next UTC fire time for a 5-field cron expression",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "text_diff",
+          "description": "Unified diff plus added/removed counts between two texts",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "text_extract",
+          "description": "Extract text, title, headings, links, URLs and emails from HTML or plain text",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "domain_whois",
+          "description": "Structured WHOIS via RDAP: registrar, statuses, dates, nameservers",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "dns_lookup",
+          "description": "DNS-over-HTTPS lookup for A, AAAA, CNAME, MX, TXT, NS and more",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "github_repo_stats",
+          "description": "Popularity and metadata for any public GitHub repo",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "email_validate",
+          "description": "Email syntax check plus live MX probe of the domain",
+          "priceUsdt": 0.001
+        }
+      ],
+      "tags": ["data", "utilities", "developer-tools", "x402"],
+      "addedAt": "2026-11-15"
+    },
+    {
+      "id": "47620-blockchain-data",
+      "name": "47620 Blockchain Data",
+      "tagline": "Pay-per-call on-chain data and payee trust checks across Solana, Base and Polygon",
+      "description": "Non-custodial x402 data API for AI agents: network health, gas, trending tokens, token reports, and pre-payment risk and trust checks for wallets across Solana, Base and Polygon, plus crypto market data. Pay USDC per call on Base, Polygon or Solana. No signup, no API key.",
+      "author": "47620.xyz",
+      "github": "https://github.com/fito311/solana-data-mcp",
+      "endpoint": "https://47620.xyz",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base", "polygon", "solana"],
+      "tools": [
+        {
+          "name": "health",
+          "description": "Network health for Solana, Base or Polygon (from $0.001)",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "gas",
+          "description": "Current gas price and estimated transfer cost on Base or Polygon",
+          "priceUsdt": 0.005
+        },
+        {
+          "name": "trending",
+          "description": "Trending DEX pairs by 24h volume on a chosen chain",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "snapshot",
+          "description": "Network health, native price and top trending pairs in one call",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "token_report",
+          "description": "Token due diligence: price, liquidity, volume, DEX pairs, supply",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "risk_check",
+          "description": "0-100 risk score with reasons before paying an address",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "trust_check",
+          "description": "Multichain safe/review/avoid verdict for a wallet or payee",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "crypto_price",
+          "description": "Live spot price, 24h change and volume for a major coin",
+          "priceUsdt": 0.002
+        }
+      ],
+      "tags": ["crypto", "blockchain", "data", "solana", "polygon", "security"],
+      "addedAt": "2026-11-15"
     }
   ]
 }
