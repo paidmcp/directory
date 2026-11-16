@@ -290,6 +290,27 @@
       ],
       "tags": ["crypto", "blockchain", "data", "solana", "polygon", "security"],
       "addedAt": "2026-11-15"
+    },
+    {
+      "id": "bug-bounty-intelligence",
+      "name": "Bug Bounty Intelligence",
+      "tagline": "AI-generated Solidity vulnerability scan hypotheses for public GitHub repos",
+      "description": "Submits a public GitHub repo for an automated Solidity analysis and returns AI-generated hypotheses to review by hand, not a confirmed-bug list. Prompted with acceptance-rate hints from 9,200 exact-reconciled findings across 38 closed Sherlock and Code4rena audit contests. Pay per scan in USDC on Base via x402, no signup.",
+      "author": "holistis",
+      "github": "https://github.com/holistis/bug-bounty-intelligence-mcp",
+      "endpoint": "https://x402.tokenizen.nl",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "scan_contract",
+          "description": "Submit a public GitHub repo of Solidity contracts for an automated vulnerability-hypothesis scan",
+          "priceUsdt": 5
+        }
+      ],
+      "tags": ["security", "solidity", "smart-contract", "audit", "defi"],
+      "addedAt": "2026-11-16"
     }
   ]
 }
