@@ -1,7 +1,12 @@
 // Verifies that listed MCP endpoints are live and paid:
 //   1. `<endpoint>/mcp` answers an MCP `initialize`
 //   2. `tools/list` contains every tool named in the listing
-//   3. an unpaid `tools/call` returns an x402 payment requirement
+//   3. an unpaid `tools/call` returns an x402 payment requirement, as an
+//      HTTP 402, inside the tool result (x402 MCP transport), or as a link
+//      to a paid URL
+//   4. the server reads payments: a payment with an invalid (all-zero)
+//      signature, sent the way the server asked for it, gets a different
+//      answer than no payment at all. Such a payment can never settle.
 //
 // Usage:
 //   node scripts/check-endpoints.mjs                 # every listing
@@ -12,6 +17,7 @@
 //
 // Exits with code 1 when any checked listing fails.
 
+import { randomBytes } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -105,12 +111,13 @@ class McpSession {
     this.nextId = 1;
   }
 
-  async post(body) {
+  async post(body, extraHeaders = {}) {
     const headers = {
       "content-type": "application/json",
       accept: "application/json, text/event-stream",
       "mcp-protocol-version": PROTOCOL_VERSION,
       "user-agent": "paidmcp-directory-checker",
+      ...extraHeaders,
     };
     if (this.sessionId) headers["mcp-session-id"] = this.sessionId;
     const response = await fetch(this.url, {
@@ -125,13 +132,11 @@ class McpSession {
     return { status: response.status, headers: response.headers, text };
   }
 
-  async request(method, params) {
-    const response = await this.post({
-      jsonrpc: "2.0",
-      id: this.nextId++,
-      method,
-      params,
-    });
+  async request(method, params, extraHeaders = {}) {
+    const response = await this.post(
+      { jsonrpc: "2.0", id: this.nextId++, method, params },
+      extraHeaders,
+    );
     let message = null;
     try {
       message = parseRpcBody(response.text);
@@ -146,51 +151,205 @@ class McpSession {
   }
 }
 
-// True when `value` contains an x402 payment requirement object:
-// { x402Version: number, accepts: [ ...payment options ] }.
+function isRequirement(value) {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    typeof value.x402Version === "number" &&
+    Array.isArray(value.accepts) &&
+    value.accepts.length > 0
+  );
+}
+
+// Finds an x402 payment requirement ({ x402Version, accepts }) in a value.
 // Text content is parsed too, since many servers return the requirement as
-// JSON inside a tool result's text.
-function containsX402Requirement(value, depth = 0) {
-  if (depth > 8 || value === null || value === undefined) return false;
+// JSON inside a tool result's text. A requirement wrapped as
+// { url, status: 402 | payment_required: true, challenge } is a "pointer":
+// the payment is made to that URL rather than to the MCP call.
+function findRequirement(value, depth = 0) {
+  if (depth > 8 || value === null || value === undefined) return null;
   if (typeof value === "string") {
     const trimmed = value.trim();
-    if (!trimmed.startsWith("{")) return false;
+    if (!trimmed.startsWith("{")) return null;
     try {
-      return containsX402Requirement(JSON.parse(trimmed), depth + 1);
+      return findRequirement(JSON.parse(trimmed), depth + 1);
     } catch {
-      return false;
+      return null;
     }
   }
   if (Array.isArray(value)) {
-    return value.some((item) => containsX402Requirement(item, depth + 1));
+    for (const item of value) {
+      const found = findRequirement(item, depth + 1);
+      if (found) return found;
+    }
+    return null;
   }
   if (typeof value === "object") {
     if (
-      typeof value.x402Version === "number" &&
-      Array.isArray(value.accepts) &&
-      value.accepts.length > 0
+      typeof value.url === "string" &&
+      (value.payment_required === true || value.status === 402) &&
+      isRequirement(value.challenge)
     ) {
-      return true;
+      return { challenge: value.challenge, pointer: value.url };
     }
-    return Object.values(value).some((item) =>
-      containsX402Requirement(item, depth + 1),
-    );
+    if (isRequirement(value)) return { challenge: value };
+    for (const item of Object.values(value)) {
+      const found = findRequirement(item, depth + 1);
+      if (found) return found;
+    }
   }
-  return false;
+  return null;
 }
 
-function isPaymentRequired(response) {
-  if (response.status === 402) return true;
-  const header = response.headers.get("payment-required");
-  if (header) {
-    try {
-      const decoded = Buffer.from(header, "base64").toString("utf8");
-      if (containsX402Requirement(decoded)) return true;
-    } catch {
-      // fall through to the body
-    }
+function decodeHeader(value) {
+  if (!value) return null;
+  try {
+    return findRequirement(Buffer.from(value, "base64").toString("utf8"));
+  } catch {
+    return null;
   }
-  return containsX402Requirement(response.message);
+}
+
+/**
+ * How a response asks for payment: "http" (HTTP 402), "mcp" (requirement in
+ * the tool result, x402 MCP transport) or "pointer" (pay a linked URL).
+ * Returns null when it does not ask for payment.
+ */
+function paymentRequest(response) {
+  const fromHeader = decodeHeader(response.headers.get("payment-required"));
+  const fromBody = findRequirement(response.message ?? response.text);
+  if (response.status === 402) {
+    return { style: "http", challenge: (fromHeader ?? fromBody)?.challenge };
+  }
+  if (fromHeader) return { style: "http", challenge: fromHeader.challenge };
+  if (fromBody?.pointer) {
+    return {
+      style: "pointer",
+      challenge: fromBody.challenge,
+      url: fromBody.pointer,
+    };
+  }
+  if (fromBody) return { style: "mcp", challenge: fromBody.challenge };
+  return null;
+}
+
+/**
+ * A well-formed x402 "exact" EVM payment whose signature is all zeros. It
+ * cannot be settled by anyone; it only shows whether the server reads and
+ * verifies payments sent the way it asked for them.
+ */
+function invalidPayment(challenge) {
+  const accepted = challenge?.accepts?.find(
+    (a) => a?.scheme === "exact" && String(a?.network).startsWith("eip155:"),
+  );
+  if (!accepted) return null;
+  const now = Math.floor(Date.now() / 1000);
+  const authorization = {
+    from: "0x000000000000000000000000000000000000dEaD",
+    to: accepted.payTo,
+    value: String(accepted.amount ?? accepted.maxAmountRequired),
+    validAfter: String(now - 60),
+    validBefore: String(now + 120),
+    nonce: `0x${randomBytes(32).toString("hex")}`,
+  };
+  const signature = `0x${"00".repeat(65)}`;
+  if (challenge.x402Version === 1) {
+    return {
+      x402Version: 1,
+      scheme: accepted.scheme,
+      network: accepted.network,
+      payload: { signature, authorization },
+    };
+  }
+  return {
+    x402Version: challenge.x402Version,
+    resource: challenge.resource,
+    accepted,
+    payload: { signature, authorization },
+  };
+}
+
+const encodePayment = (payment) =>
+  Buffer.from(JSON.stringify(payment)).toString("base64");
+
+/** What a payment-related answer says, for comparing two answers. */
+function verdict(response) {
+  const request = paymentRequest(response);
+  return JSON.stringify({
+    status: response.status,
+    asksForPayment: Boolean(request),
+    error: request?.challenge?.error ?? null,
+  });
+}
+
+/**
+ * Sends an invalid payment the way the server asked for it and checks that
+ * the answer changes. A server that answers exactly as if nothing was sent
+ * never reads payments, so nobody can pay it.
+ */
+async function probePaymentAcceptance(session, toolCall, unpaid, request) {
+  const payment = invalidPayment(request.challenge);
+  if (!payment) {
+    return {
+      ok: true,
+      note: "payment acceptance not verified (no EVM exact option)",
+    };
+  }
+  let before;
+  let after;
+  if (request.style === "http") {
+    before = unpaid;
+    after = await session.request("tools/call", toolCall, {
+      "payment-signature": encodePayment(payment),
+      "x-payment": encodePayment(payment),
+    });
+  } else if (request.style === "mcp") {
+    before = unpaid;
+    after = await session.request("tools/call", {
+      ...toolCall,
+      _meta: { "x402/payment": payment },
+    });
+  } else {
+    const get = async (headers = {}) => {
+      const response = await fetch(request.url, {
+        headers: { accept: "application/json", ...headers },
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+      });
+      const text = await response.text();
+      let message = null;
+      try {
+        message = JSON.parse(text);
+      } catch {
+        // not JSON
+      }
+      return {
+        status: response.status,
+        headers: response.headers,
+        text,
+        message,
+      };
+    };
+    before = await get();
+    after = await get({ "payment-signature": encodePayment(payment) });
+  }
+  if (
+    !paymentRequest(after) &&
+    after.status < 400 &&
+    !after.message?.result?.isError
+  ) {
+    return { ok: false, note: "accepted a payment with an invalid signature" };
+  }
+  if (verdict(after) === verdict(before)) {
+    return {
+      ok: false,
+      note: `ignores payments: an invalid payment sent ${request.style === "mcp" ? 'in _meta["x402/payment"]' : request.style === "http" ? "in the PAYMENT-SIGNATURE header" : `to ${request.url}`} got the same answer as no payment`,
+    };
+  }
+  const error = paymentRequest(after)?.challenge?.error;
+  return {
+    ok: true,
+    note: `reads payments (invalid one rejected${error ? `: ${String(error).slice(0, 60)}` : ""})`,
+  };
 }
 
 async function checkListing(mcp) {
@@ -229,21 +388,33 @@ async function checkListing(mcp) {
       result.notes.push("no listed tool to probe for payment");
       return result;
     }
-    const call = await session.request("tools/call", {
+    const toolCall = {
       name: probe.name,
       arguments: placeholderArgs(liveByName.get(probe.name).inputSchema),
-    });
-    const paid = isPaymentRequired(call);
-    if (!paid) {
+    };
+    const call = await session.request("tools/call", toolCall);
+    const request = paymentRequest(call);
+    if (!request) {
       result.notes.push(
         `unpaid tools/call "${probe.name}" did not return an x402 payment requirement (HTTP ${call.status})`,
       );
+      return result;
     }
 
-    result.ok = paid && missing.length === 0;
-    if (result.ok) {
+    const acceptance = await probePaymentAcceptance(
+      session,
+      toolCall,
+      call,
+      request,
+    );
+    result.ok = acceptance.ok && missing.length === 0;
+    if (acceptance.ok) {
       result.notes.push(
-        `${liveTools.length} live tools; "${probe.name}" requires payment`,
+        `${liveTools.length} live tools; "${probe.name}" requires payment (${request.style}) and ${acceptance.note}`,
+      );
+    } else {
+      result.notes.push(
+        `"${probe.name}" requires payment but ${acceptance.note}`,
       );
     }
   } catch (error) {

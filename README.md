@@ -59,7 +59,10 @@ Every PR runs:
 
 - `validate:data`: the listing rules above.
 - `format:check`: Prettier formatting (don't reformat other entries).
-- `check:endpoints` on new or changed listings: `<endpoint>/mcp` must answer MCP `initialize`, every listed tool must appear in the live `tools/list`, and an unpaid `tools/call` must return an x402 payment requirement.
+- `check:endpoints` on new or changed listings:
+  - `<endpoint>/mcp` must answer MCP `initialize`, and every listed tool must appear in the live `tools/list`.
+  - An unpaid `tools/call` must ask for an x402 payment in one of the supported ways: HTTP 402, a payment request in the tool result ([x402 MCP transport](https://github.com/coinbase/x402/blob/main/specs/transports-v2/mcp.md), paid via `_meta["x402/payment"]`), or a link to a paid URL (`{ url, status: 402, challenge }`).
+  - **The server must actually read payments.** The check sends a payment with an invalid, all-zero signature the way the server asked for it, and the answer must differ from the unpaid one (for example "invalid signature"). Such a payment can never be settled. A server that answers exactly as if nothing was sent cannot be paid by any client and fails.
 - A production build.
 
 A daily workflow runs `check:endpoints` on every listing and keeps one open issue (label `endpoint-health`) listing anything that fails.
