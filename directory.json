@@ -311,6 +311,54 @@
       ],
       "tags": ["security", "solidity", "smart-contract", "audit", "defi"],
       "addedAt": "2026-11-16"
+    },
+    {
+      "id": "raen-mcp-gateway",
+      "name": "RAEN MCP Gateway",
+      "tagline": "Paid x402 tools: legal research, dispute letters, ticker analysis, contract review, image generation",
+      "description": "Five paid MCP tools over x402 on Base Mainnet USDC: raen_law_lookup (US credit law research), raen_dispute_letter (FCRA dispute letter + certificate), raen_ticker_analysis (multi-agent consensus), raen_contract_analysis (contract risk review), raen_image_generate. First call free for new wallets; free 30-day dev keys via POST /keys/request.",
+      "author": "bshelby88",
+      "github": "https://github.com/bshelby88/raen-mcp",
+      "endpoint": "https://raen-mcp-gateway.fly.dev",
+      "listingType": "live",
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "raen_law_lookup",
+          "description": "US credit-law research with citations",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "raen_ticker_analysis",
+          "description": "Multi-agent ticker analysis consensus",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "raen_dispute_letter",
+          "description": "FCRA-compliant dispute letter + SVG certificate of dispute",
+          "priceUsdt": 0.1
+        },
+        {
+          "name": "raen_image_generate",
+          "description": "Generate an image from a prompt",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "raen_contract_analysis",
+          "description": "Contract risk analysis and red-flag report",
+          "priceUsdt": 0.05
+        }
+      ],
+      "tags": [
+        "legal",
+        "finance",
+        "credit",
+        "disputes",
+        "contracts",
+        "images",
+        "data"
+      ],
+      "addedAt": "2026-11-18"
     }
   ]
 }
