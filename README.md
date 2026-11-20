@@ -61,7 +61,10 @@ Every PR runs:
 - `format:check`: Prettier formatting (don't reformat other entries).
 - `check:endpoints` on new or changed listings:
   - `<endpoint>/mcp` must answer MCP `initialize`, and every listed tool must appear in the live `tools/list`.
-  - An unpaid `tools/call` must ask for an x402 payment in one of the supported ways: HTTP 402, a payment request in the tool result ([x402 MCP transport](https://github.com/coinbase/x402/blob/main/specs/transports-v2/mcp.md), paid via `_meta["x402/payment"]`), or a link to a paid URL (`{ url, status: 402, challenge }`).
+  - An unpaid `tools/call` must ask for an x402 payment in a standard format that x402 clients (the official `@x402` libraries, `paidmcp-client`) can read:
+    - **HTTP 402** with the PaymentRequired in the base64 `PAYMENT-REQUIRED` header ([x402 v2 HTTP transport](https://github.com/coinbase/x402/tree/main/specs/transports-v2)). x402 v1 may put it in the JSON body instead.
+    - **In the tool result** ([x402 MCP transport](https://github.com/coinbase/x402/blob/main/specs/transports-v2/mcp.md)): the PaymentRequired object itself, not wrapped in another object, in `structuredContent`, a JSON text content item, or `_meta["x402/error"]`. It is paid via `_meta["x402/payment"]`.
+    - **A payment link**: `{ url, status: 402, challenge }` in one of those places, paid over HTTP 402 at that URL.
   - **The server must actually read payments.** The check sends a payment with an invalid, all-zero signature the way the server asked for it, and the answer must differ from the unpaid one (for example "invalid signature"). Such a payment can never be settled. A server that answers exactly as if nothing was sent cannot be paid by any client and fails.
 - A production build.
 

@@ -161,50 +161,59 @@ function isRequirement(value) {
   );
 }
 
-// Finds an x402 payment requirement ({ x402Version, accepts }) in a value.
-// Text content is parsed too, since many servers return the requirement as
-// JSON inside a tool result's text. A requirement wrapped as
-// { url, status: 402 | payment_required: true, challenge } is a "pointer":
-// the payment is made to that URL rather than to the MCP call.
-function findRequirement(value, depth = 0) {
-  if (depth > 8 || value === null || value === undefined) return null;
-  if (typeof value === "string") {
-    const trimmed = value.trim();
-    if (!trimmed.startsWith("{")) return null;
-    try {
-      return findRequirement(JSON.parse(trimmed), depth + 1);
-    } catch {
-      return null;
-    }
-  }
-  if (Array.isArray(value)) {
-    for (const item of value) {
-      const found = findRequirement(item, depth + 1);
-      if (found) return found;
-    }
+function parseJson(text) {
+  if (typeof text !== "string") return null;
+  const trimmed = text.trim();
+  if (!trimmed.startsWith("{")) return null;
+  try {
+    return JSON.parse(trimmed);
+  } catch {
     return null;
   }
-  if (typeof value === "object") {
-    if (
-      typeof value.url === "string" &&
-      (value.payment_required === true || value.status === 402) &&
-      isRequirement(value.challenge)
-    ) {
-      return { challenge: value.challenge, pointer: value.url };
-    }
-    if (isRequirement(value)) return { challenge: value };
-    for (const item of Object.values(value)) {
-      const found = findRequirement(item, depth + 1);
-      if (found) return found;
-    }
+}
+
+// A payment link: { url, status: 402 | payment_required: true, challenge }.
+// The payment is made to that URL rather than to the MCP call.
+function asPointer(value) {
+  if (
+    value &&
+    typeof value.url === "string" &&
+    (value.payment_required === true || value.status === 402) &&
+    isRequirement(value.challenge)
+  ) {
+    return { challenge: value.challenge, pointer: value.url };
   }
   return null;
 }
 
+// Payment requirements are only recognized where standard x402 clients
+// (the official @x402 libraries, paidmcp-client) look for them, so a
+// listing that passes can actually be paid:
+// - in a tool result (x402 MCP transport): a top-level PaymentRequired in
+//   _meta["x402/error"], structuredContent, or a JSON text content item;
+//   or a top-level payment link in one of those places.
+function requirementInResult(message) {
+  const result = message?.result;
+  if (!result || typeof result !== "object") return null;
+  const candidates = [result._meta?.["x402/error"], result.structuredContent];
+  for (const item of Array.isArray(result.content) ? result.content : []) {
+    if (item?.type === "text") candidates.push(parseJson(item.text));
+  }
+  for (const candidate of candidates) {
+    const pointer = asPointer(candidate);
+    if (pointer) return pointer;
+    if (isRequirement(candidate)) return { challenge: candidate };
+  }
+  return null;
+}
+
+// - on HTTP 402 (x402 HTTP transport): v2 in the base64 PAYMENT-REQUIRED
+//   header, v1 as the JSON body itself.
 function decodeHeader(value) {
   if (!value) return null;
   try {
-    return findRequirement(Buffer.from(value, "base64").toString("utf8"));
+    const decoded = JSON.parse(Buffer.from(value, "base64").toString("utf8"));
+    return isRequirement(decoded) ? decoded : null;
   } catch {
     return null;
   }
@@ -212,24 +221,29 @@ function decodeHeader(value) {
 
 /**
  * How a response asks for payment: "http" (HTTP 402), "mcp" (requirement in
- * the tool result, x402 MCP transport) or "pointer" (pay a linked URL).
+ * the tool result, x402 MCP transport), "pointer" (pay a linked URL), or
+ * "nonstandard" (asks for payment in a way standard clients cannot read).
  * Returns null when it does not ask for payment.
  */
 function paymentRequest(response) {
   const fromHeader = decodeHeader(response.headers.get("payment-required"));
-  const fromBody = findRequirement(response.message ?? response.text);
+  if (fromHeader) return { style: "http", challenge: fromHeader };
   if (response.status === 402) {
-    return { style: "http", challenge: (fromHeader ?? fromBody)?.challenge };
-  }
-  if (fromHeader) return { style: "http", challenge: fromHeader.challenge };
-  if (fromBody?.pointer) {
+    const body = parseJson(response.text);
+    if (isRequirement(body) && body.x402Version === 1) {
+      return { style: "http", challenge: body };
+    }
     return {
-      style: "pointer",
-      challenge: fromBody.challenge,
-      url: fromBody.pointer,
+      style: "nonstandard",
+      reason:
+        "answers HTTP 402 without a PAYMENT-REQUIRED header (x402 v2 HTTP transport), so standard x402 clients cannot read the payment request",
     };
   }
-  if (fromBody) return { style: "mcp", challenge: fromBody.challenge };
+  const found = requirementInResult(response.message);
+  if (found?.pointer) {
+    return { style: "pointer", challenge: found.challenge, url: found.pointer };
+  }
+  if (found) return { style: "mcp", challenge: found.challenge };
   return null;
 }
 
@@ -396,8 +410,12 @@ async function checkListing(mcp) {
     const request = paymentRequest(call);
     if (!request) {
       result.notes.push(
-        `unpaid tools/call "${probe.name}" did not return an x402 payment requirement (HTTP ${call.status})`,
+        `unpaid tools/call "${probe.name}" did not return an x402 payment requirement in a standard format (HTTP ${call.status})`,
       );
+      return result;
+    }
+    if (request.style === "nonstandard") {
+      result.notes.push(`unpaid tools/call "${probe.name}" ${request.reason}`);
       return result;
     }
 
