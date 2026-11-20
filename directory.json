@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,7 +112,12 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -108,7 +130,9 @@
       "endpoint": "https://sigtap-mcp.sigtap.workers.dev",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "deliverability_audit",
@@ -171,7 +195,13 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["email", "domain", "developer-tools", "crypto", "x402"],
+      "tags": [
+        "email",
+        "domain",
+        "developer-tools",
+        "crypto",
+        "x402"
+      ],
       "addedAt": "2026-11-15"
     },
     {
@@ -184,7 +214,9 @@
       "endpoint": "https://penniless-json-repair.sjaman.workers.dev",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "repair_json",
@@ -232,7 +264,12 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["data", "utilities", "developer-tools", "x402"],
+      "tags": [
+        "data",
+        "utilities",
+        "developer-tools",
+        "x402"
+      ],
       "addedAt": "2026-11-15"
     },
     {
@@ -245,7 +282,11 @@
       "endpoint": "https://47620.xyz",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base", "polygon", "solana"],
+      "chains": [
+        "base",
+        "polygon",
+        "solana"
+      ],
       "tools": [
         {
           "name": "health",
@@ -288,7 +329,14 @@
           "priceUsdt": 0.002
         }
       ],
-      "tags": ["crypto", "blockchain", "data", "solana", "polygon", "security"],
+      "tags": [
+        "crypto",
+        "blockchain",
+        "data",
+        "solana",
+        "polygon",
+        "security"
+      ],
       "addedAt": "2026-11-15"
     },
     {
@@ -301,7 +349,9 @@
       "endpoint": "https://x402.tokenizen.nl",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "scan_contract",
@@ -309,7 +359,13 @@
           "priceUsdt": 5
         }
       ],
-      "tags": ["security", "solidity", "smart-contract", "audit", "defi"],
+      "tags": [
+        "security",
+        "solidity",
+        "smart-contract",
+        "audit",
+        "defi"
+      ],
       "addedAt": "2026-11-16"
     },
     {
@@ -321,7 +377,9 @@
       "github": "https://github.com/bshelby88/raen-mcp",
       "endpoint": "https://raen-mcp-gateway.fly.dev",
       "listingType": "live",
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "raen_law_lookup",
@@ -359,6 +417,70 @@
         "data"
       ],
       "addedAt": "2026-11-18"
+    },
+    {
+      "id": "autotasker-hub",
+      "name": "AutoTasker Hub — China Social Data",
+      "tagline": "Pay-per-call Chinese social & market data for AI agents over x402",
+      "description": "x402-native MCP server exposing Weibo/Douban/Zhihu/Bilibili hotlists, cross-platform search, macro market scan, trend prediction and 70+ utility feeds. Agents pay per call in USDC on Base; settlement is on-chain to a published treasury with a public proof endpoint.",
+      "author": "AutoTasker Hub",
+      "github": "https://github.com/breezesamuel/autotasker-hub-aevum",
+      "endpoint": "https://autotasker.highkingflower.com",
+      "listingType": "live",
+      "trialSupported": true,
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "get_hotlist",
+          "description": "Weibo/Douban/Zhihu/Bilibili/Tieba trending posts",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "search_chinese_social",
+          "description": "Cross-board keyword search",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "export_full_dataset",
+          "description": "Full dataset export with metadata",
+          "priceUsdt": 0.5
+        },
+        {
+          "name": "daily_report",
+          "description": "24h trending digest with sentiment & momentum",
+          "priceUsdt": 0.25
+        },
+        {
+          "name": "market_scan",
+          "description": "Live crypto market scan - 20 top movers",
+          "priceUsdt": 0.1
+        },
+        {
+          "name": "trend_predict",
+          "description": "Which topics peak in next 2 hours",
+          "priceUsdt": 0.15
+        },
+        {
+          "name": "sample_free",
+          "description": "Free sample call",
+          "priceUsdt": 0
+        },
+        {
+          "name": "weather",
+          "description": "Current weather via Open-Meteo",
+          "priceUsdt": 0.01
+        }
+      ],
+      "tags": [
+        "x402",
+        "china",
+        "social-data",
+        "market-data",
+        "base"
+      ],
+      "addedAt": "2026-11-19"
     }
   ]
 }
