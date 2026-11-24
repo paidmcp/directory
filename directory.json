@@ -359,6 +359,40 @@
         "data"
       ],
       "addedAt": "2026-11-18"
+    },
+    {
+      "id": "x402-package-advisories",
+      "name": "Package Advisories and China Workday",
+      "tagline": "Known vulnerabilities for an exact package version (OSV.dev), plus mainland China workday checks",
+      "description": "package_advisories returns the known advisories (CVE, GHSA, PYSEC, GO, RUSTSEC) for one exact npm, PyPI, Go, crates.io or Maven package version from OSV.dev, with CVSS, affected ranges, fixed versions and links. cn_workday_check says whether a date is a working day in mainland China under State Council holiday notices, including makeup workdays. Unpaid calls return a payment link { url, status: 402, challenge } paid over x402 in USDC on Base.",
+      "author": "walkley",
+      "github": "https://github.com/walkley/x402-content-site",
+      "endpoint": "https://mvqz0m8d6g.execute-api.ap-northeast-1.amazonaws.com/paid",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "package_advisories",
+          "description": "Known advisories for one exact npm, PyPI, Go, crates.io or Maven package version (OSV.dev)",
+          "priceUsdt": 0.005
+        },
+        {
+          "name": "cn_workday_check",
+          "description": "Is a date a working day in mainland China (State Council notices); $0.003 per date, $0.005 for a date range",
+          "priceUsdt": 0.003
+        }
+      ],
+      "tags": [
+        "security",
+        "vulnerabilities",
+        "dependencies",
+        "developer-tools",
+        "calendar",
+        "china",
+        "x402"
+      ],
+      "addedAt": "2026-11-24"
     }
   ]
 }
