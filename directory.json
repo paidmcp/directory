@@ -359,6 +359,66 @@
         "data"
       ],
       "addedAt": "2026-11-18"
+    },
+    {
+      "id": "x402-web3-fin-gateway",
+      "name": "x402 Web3 & Financial Security Gateway",
+      "tagline": "7 deterministic Web3 security & financial audit tools paid per call in Base USDC",
+      "description": "Multichain wallet/contract address validation (8 chains), Base & Solana token honeypot and rug-pull scanning, raw EVM calldata decoding, EIP-712 typed-data signature auditing, CJK CSV mojibake repair, multi-page table extraction to XLSX, and integer statement-invoice reconciliation. 0% middleman fee on Base Mainnet USDC.",
+      "author": "2848823170",
+      "github": "https://github.com/2848823170/x402-web3-fin-gateway",
+      "endpoint": "https://x402-web3-fin-gateway.vercel.app",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "validate_multichain_address",
+          "description": "Validate and normalize wallet/contract addresses across EVM, Tron, Bitcoin, Solana, TON, XRPL, Cosmos, and Stacks",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "decode_and_audit_evm_calldata",
+          "description": "Decode raw EVM hex calldata and flag unlimited approvals, Permit2, zero-minOut swaps, and DELEGATECALL risks",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "audit_eip712_signature_payload",
+          "description": "Audit off-chain eth_signTypedData_v4 payloads (Permit, Permit2, Seaport, EIP-3009, SafeTx) before signing",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "repair_cjk_csv_mojibake",
+          "description": "Repair GB18030/GBK/Big5/Shift-JIS/UTF-16 CSV mojibake and neutralize OWASP formula injection",
+          "priceUsdt": 0.01
+        },
+        {
+          "name": "extract_and_clean_pdf_tables_to_xlsx",
+          "description": "Extract and stitch multi-page PDF/HTML/Markdown tables into OpenXML XLSX, Markdown, and CSV",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "reconcile_statements_and_invoices",
+          "description": "Reconcile payment statements against electronic invoices using exact micro-unit math into JSON and XLSX",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "scan_token_rug_risk",
+          "description": "Scan Base ERC-20 and Solana SPL/Token-2022 tokens for proxies, unrenounced owner, LP depth, and honeypot traps",
+          "priceUsdt": 0.01
+        }
+      ],
+      "tags": [
+        "security",
+        "crypto",
+        "defi",
+        "finance",
+        "audit",
+        "x402"
+      ],
+      "addedAt": "2026-11-24"
     }
   ]
 }
