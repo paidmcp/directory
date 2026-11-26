@@ -10,7 +10,10 @@
       "endpoint": "https://crypto-prices.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "get_price",
@@ -28,7 +31,11 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["crypto", "data", "prices"],
+      "tags": [
+        "crypto",
+        "data",
+        "prices"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -41,7 +48,10 @@
       "endpoint": "https://persian-translation.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "translate_to_persian",
@@ -59,7 +69,11 @@
           "priceUsdt": 0.005
         }
       ],
-      "tags": ["translation", "persian", "llm"],
+      "tags": [
+        "translation",
+        "persian",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -72,7 +86,10 @@
       "endpoint": "https://spanish-bureaucracy.paidmcp.dev",
       "listingType": "example",
       "trialSupported": true,
-      "chains": ["base", "plasma"],
+      "chains": [
+        "base",
+        "plasma"
+      ],
       "tools": [
         {
           "name": "interpret_aeat_letter",
@@ -95,7 +112,12 @@
           "priceUsdt": 0.05
         }
       ],
-      "tags": ["spain", "tax", "bureaucracy", "llm"],
+      "tags": [
+        "spain",
+        "tax",
+        "bureaucracy",
+        "llm"
+      ],
       "addedAt": "2026-06-01"
     },
     {
@@ -108,7 +130,9 @@
       "endpoint": "https://sigtap-mcp.sigtap.workers.dev",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "deliverability_audit",
@@ -171,7 +195,13 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["email", "domain", "developer-tools", "crypto", "x402"],
+      "tags": [
+        "email",
+        "domain",
+        "developer-tools",
+        "crypto",
+        "x402"
+      ],
       "addedAt": "2026-11-15"
     },
     {
@@ -184,7 +214,9 @@
       "endpoint": "https://penniless-json-repair.sjaman.workers.dev",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "repair_json",
@@ -232,7 +264,12 @@
           "priceUsdt": 0.001
         }
       ],
-      "tags": ["data", "utilities", "developer-tools", "x402"],
+      "tags": [
+        "data",
+        "utilities",
+        "developer-tools",
+        "x402"
+      ],
       "addedAt": "2026-11-15"
     },
     {
@@ -245,7 +282,11 @@
       "endpoint": "https://47620.xyz",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base", "polygon", "solana"],
+      "chains": [
+        "base",
+        "polygon",
+        "solana"
+      ],
       "tools": [
         {
           "name": "health",
@@ -288,7 +329,14 @@
           "priceUsdt": 0.002
         }
       ],
-      "tags": ["crypto", "blockchain", "data", "solana", "polygon", "security"],
+      "tags": [
+        "crypto",
+        "blockchain",
+        "data",
+        "solana",
+        "polygon",
+        "security"
+      ],
       "addedAt": "2026-11-15"
     },
     {
@@ -301,7 +349,9 @@
       "endpoint": "https://x402.tokenizen.nl",
       "listingType": "live",
       "trialSupported": false,
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "scan_contract",
@@ -309,7 +359,13 @@
           "priceUsdt": 5
         }
       ],
-      "tags": ["security", "solidity", "smart-contract", "audit", "defi"],
+      "tags": [
+        "security",
+        "solidity",
+        "smart-contract",
+        "audit",
+        "defi"
+      ],
       "addedAt": "2026-11-16"
     },
     {
@@ -321,7 +377,9 @@
       "github": "https://github.com/bshelby88/raen-mcp",
       "endpoint": "https://raen-mcp-gateway.fly.dev",
       "listingType": "live",
-      "chains": ["base"],
+      "chains": [
+        "base"
+      ],
       "tools": [
         {
           "name": "raen_law_lookup",
@@ -359,6 +417,56 @@
         "data"
       ],
       "addedAt": "2026-11-18"
+    },
+    {
+      "id": "atlasdata-agent-tools",
+      "name": "AtlasData Agent Tools",
+      "tagline": "Paid x402 MCP tools for web research, agent security, PII redaction, and work discovery",
+      "description": "Five production MCP tools over x402 on Base Mainnet USDC: scan_prompt_injection, redact_pii, web_search, read_web_page, and agent_work_radar. Designed for autonomous agents that need per-call research, retrieval, safety checks, and income-opportunity discovery without accounts or API keys.",
+      "author": "idev9101-max",
+      "github": "https://github.com/idev9101-max/atlasdata",
+      "endpoint": "https://x402atlas.xyz",
+      "listingType": "live",
+      "chains": [
+        "base"
+      ],
+      "tools": [
+        {
+          "name": "scan_prompt_injection",
+          "description": "Classify agent-bound text for prompt-injection risk",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "redact_pii",
+          "description": "Detect and redact PII and secrets in text",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "web_search",
+          "description": "Search the public web for agent research and retrieval",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "read_web_page",
+          "description": "Extract clean readable text from a public web page or PDF",
+          "priceUsdt": 0.001
+        },
+        {
+          "name": "agent_work_radar",
+          "description": "Find live agent-work opportunities, rewards, deadlines, and blockers",
+          "priceUsdt": 0.001
+        }
+      ],
+      "tags": [
+        "agent",
+        "security",
+        "search",
+        "research",
+        "privacy",
+        "bounties",
+        "data"
+      ],
+      "addedAt": "2026-11-26"
     }
   ]
 }
