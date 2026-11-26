@@ -65,7 +65,14 @@ Every PR runs:
     - **HTTP 402** with the PaymentRequired in the base64 `PAYMENT-REQUIRED` header ([x402 v2 HTTP transport](https://github.com/coinbase/x402/tree/main/specs/transports-v2)). x402 v1 may put it in the JSON body instead.
     - **In the tool result** ([x402 MCP transport](https://github.com/coinbase/x402/blob/main/specs/transports-v2/mcp.md)): the PaymentRequired object itself, not wrapped in another object, in `structuredContent`, a JSON text content item, or `_meta["x402/error"]`. It is paid via `_meta["x402/payment"]`.
     - **A payment link**: `{ url, status: 402, challenge }` in one of those places, paid over HTTP 402 at that URL.
-  - **The server must actually read payments.** The check sends a payment with an invalid, all-zero signature the way the server asked for it, and the answer must differ from the unpaid one (for example "invalid signature"). Such a payment can never be settled. A server that answers exactly as if nothing was sent cannot be paid by any client and fails.
+  - **The server must actually read payments.** The check sends a payment with an invalid, all-zero signature the way the server asked for it. Such a payment can never be settled. Like a real x402 client's payment, it copies the challenge's `resource` and `extensions`, so it is just as large. The answer must be an x402 rejection that says why:
+    - a new payment request (HTTP 402, or a PaymentRequired in the tool result) whose `error` differs from the unpaid one (for example "invalid signature"), or
+    - a failed `x402/payment-response` (`success: false`).
+
+    An HTTP 5xx, a dropped connection, a generic tool error, or the same answer as no payment all fail.
+
+  - The probe calls the first listed tool with placeholder arguments. It uses `const`, `default` or `examples` from the tool's input schema when they are given, so add `examples` if your tool would reject a placeholder like `"test"` before checking payment.
+
 - A production build.
 
 A daily workflow runs `check:endpoints` on every listing and keeps one open issue (label `endpoint-health`) listing anything that fails.
