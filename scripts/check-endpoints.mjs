@@ -62,8 +62,15 @@ function selectListings(args) {
 }
 
 // Minimal placeholder arguments so servers that validate input before
-// charging still reach the payment step.
+// charging still reach the payment step. Values the input schema gives
+// (`const`, `default`, `examples`) are used first, so a server can steer
+// the check to arguments it accepts.
 function placeholderFor(schema) {
+  if (schema && "const" in schema) return schema.const;
+  if (schema && "default" in schema) return schema.default;
+  if (Array.isArray(schema?.examples) && schema.examples.length > 0) {
+    return schema.examples[0];
+  }
   switch (schema?.type) {
     case "number":
     case "integer":
@@ -77,6 +84,9 @@ function placeholderFor(schema) {
     default:
       if (Array.isArray(schema?.enum) && schema.enum.length > 0) {
         return schema.enum[0];
+      }
+      if (schema?.format === "uri" || schema?.format === "url") {
+        return "https://example.com";
       }
       return "test";
   }
@@ -275,11 +285,14 @@ function invalidPayment(challenge) {
       payload: { signature, authorization },
     };
   }
+  // x402 v2 clients copy the challenge's resource and extensions into the
+  // payment, so this one is as large as a real payment would be.
   return {
     x402Version: challenge.x402Version,
     resource: challenge.resource,
     accepted,
     payload: { signature, authorization },
+    ...(challenge.extensions ? { extensions: challenge.extensions } : {}),
   };
 }
 
@@ -287,13 +300,42 @@ const encodePayment = (payment) =>
   Buffer.from(JSON.stringify(payment)).toString("base64");
 
 /** What a payment-related answer says, for comparing two answers. */
-function verdict(response) {
+function rejectionReason(response) {
   const request = paymentRequest(response);
+  const body = response.message ?? parseJson(response.text);
+  const settlement = body?.result?._meta?.["x402/payment-response"];
+  return (
+    request?.challenge?.error ??
+    (settlement?.success === false ? settlement.errorReason : null) ??
+    (request && typeof body?.error === "string" ? body.error : null) ??
+    null
+  );
+}
+
+function verdict(response) {
+  const body = response.message ?? parseJson(response.text);
   return JSON.stringify({
     status: response.status,
-    asksForPayment: Boolean(request),
-    error: request?.challenge?.error ?? null,
+    asksForPayment: Boolean(paymentRequest(response)),
+    error: rejectionReason(response),
+    bodyStatus: typeof body?.status === "string" ? body.status : null,
   });
+}
+
+/** A short, single-line excerpt of an answer, for failure notes. */
+function excerpt(response) {
+  const result = response.message?.result;
+  const text =
+    result?.content?.find?.((item) => item?.type === "text")?.text ??
+    response.text ??
+    "";
+  return String(text).replace(/\s+/g, " ").trim().slice(0, 120);
+}
+
+/** Whether a payment answer is a recognizable x402 rejection. */
+function isRejection(response) {
+  const settlement = response.message?.result?._meta?.["x402/payment-response"];
+  return Boolean(paymentRequest(response)) || settlement?.success === false;
 }
 
 /**
@@ -302,6 +344,18 @@ function verdict(response) {
  * never reads payments, so nobody can pay it.
  */
 async function probePaymentAcceptance(session, toolCall, unpaid, request) {
+  try {
+    return await sendInvalidPayment(session, toolCall, unpaid, request);
+  } catch (error) {
+    const cause = error?.cause?.code ?? error?.cause?.message;
+    return {
+      ok: false,
+      note: `got no answer to a payment sent the way x402 clients send it (${error?.name === "TimeoutError" ? `timed out after ${TIMEOUT_MS / 1000}s` : (cause ?? error?.message ?? String(error))}). Check that the server accepts a payment of ${encodePayment(invalidPayment(request.challenge) ?? {}).length} bytes`,
+    };
+  }
+}
+
+async function sendInvalidPayment(session, toolCall, unpaid, request) {
   const payment = invalidPayment(request.challenge);
   if (!payment) {
     return {
@@ -353,13 +407,32 @@ async function probePaymentAcceptance(session, toolCall, unpaid, request) {
   ) {
     return { ok: false, note: "accepted a payment with an invalid signature" };
   }
+  const channel =
+    request.style === "mcp"
+      ? 'in _meta["x402/payment"]'
+      : request.style === "http"
+        ? "in the PAYMENT-SIGNATURE header"
+        : `to ${request.url}`;
+  const size = encodePayment(payment).length;
+  if (after.status >= 500) {
+    return {
+      ok: false,
+      note: `answers HTTP ${after.status} to an invalid payment (${size} bytes, sent ${channel}) instead of rejecting it: ${excerpt(after)}`,
+    };
+  }
+  if (!isRejection(after)) {
+    return {
+      ok: false,
+      note: `answers an invalid payment sent ${channel} with something other than an x402 rejection (a new payment request with an error, or a failed payment-response): "${excerpt(after)}". If the tool rejected the checker's placeholder arguments, add \`examples\` to its input schema`,
+    };
+  }
   if (verdict(after) === verdict(before)) {
     return {
       ok: false,
-      note: `ignores payments: an invalid payment sent ${request.style === "mcp" ? 'in _meta["x402/payment"]' : request.style === "http" ? "in the PAYMENT-SIGNATURE header" : `to ${request.url}`} got the same answer as no payment`,
+      note: `ignores payments or hides why it rejected one: an invalid payment sent ${channel} got the same answer as no payment. Put the rejection reason in the PaymentRequired \`error\``,
     };
   }
-  const error = paymentRequest(after)?.challenge?.error;
+  const error = rejectionReason(after);
   return {
     ok: true,
     note: `reads payments (invalid one rejected${error ? `: ${String(error).slice(0, 60)}` : ""})`,
