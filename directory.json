@@ -359,6 +359,37 @@
         "data"
       ],
       "addedAt": "2026-11-18"
+    },
+    {
+      "id": "novacraft-web3-tools",
+      "name": "NovaCraft Web3 Tools",
+      "tagline": "Pay-per-call Solidity security triage, token risk brief, and Veo 3.1 storyboards on Base",
+      "description": "Three paid Gemini Vertex AI Web3 and creative MCP tools settled per call in USDC on Base Mainnet via x402 (no signup or API keys required): solidity_triage ($0.05) runs static security + Gemini analysis on Solidity contracts; token_risk_brief ($0.02) produces token risk and contract posture briefs; video_storyboard ($0.03) generates Veo 3.1 launch video shotlists and prompts.",
+      "author": "z121245017-ai",
+      "github": "https://github.com/z121245017-ai/novacraft-x402-api",
+      "endpoint": "https://novacraft-x402-api-981337528602.us-central1.run.app",
+      "listingType": "live",
+      "trialSupported": false,
+      "chains": ["base"],
+      "tools": [
+        {
+          "name": "solidity_triage",
+          "description": "Deterministic static checks plus Gemini Solidity security triage on smart contract code",
+          "priceUsdt": 0.05
+        },
+        {
+          "name": "token_risk_brief",
+          "description": "Structured Web3 token risk and contract security posture brief",
+          "priceUsdt": 0.02
+        },
+        {
+          "name": "video_storyboard",
+          "description": "Structured Veo 3.1 promotional video storyboard, scene timing, and visual prompts",
+          "priceUsdt": 0.03
+        }
+      ],
+      "tags": ["security", "solidity", "web3", "defi", "video", "ai", "base"],
+      "addedAt": "2026-11-27"
     }
   ]
 }
